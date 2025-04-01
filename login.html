@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Storybanaao</title>
+    <style>
+        body {
+            background: url('https://images7.alphacoders.com/124/1249146.jpg') center/cover no-repeat;
+            
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1a1a2e;
+        }
+        .login-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.5);
+            color: white;
+            width: 300px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: #2a2a3e;
+            color: white;
+        }
+        input::placeholder {
+            color: #bbb;
+        }
+        .login-btn {
+            background: linear-gradient(90deg, #ff6b6b, #6a5acd);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+        .login-btn:hover {
+            background: linear-gradient(90deg, #6a5acd, #ff6b6b);
+            transform: scale(1.05);
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 10px;
+            display: none;
+        }
+        .suggestion-link {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-size: 0.9em;
+            display: block;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login to StoryBanaao</h2>
+        <form action="" id="loginForm">
+            <input type="text" placeholder="Username" id="email">
+            <input type="password" placeholder="Password" id="password">
+            <button class="login-btn" type="submit">Login</button>
+            <p class="error-message" id="error-message">Invalid credentials, please try again.</p>
+            <a href="index.html" class="suggestion-link">Go to Suggestions Page</a>
+            <a href="register.html" class="suggestion-link">Register</a>
+        </form>
+    </div>
+  <script src="js/auth.js"></script>
+
+</body>
+</html>

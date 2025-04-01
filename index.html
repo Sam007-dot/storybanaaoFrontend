@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryCraft - Interactive Story Generator</title>
+    <style>
+        /* General Styles */
+        body {
+    background: url('./assets/images/omni.jpg') center/cover no-repeat;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(to bottom, rgba(10, 10, 10, 0), rgba(10, 10, 10, 0)), url('invincible.jpg') center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 150px 0;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(252, 159, 216, 0.5);
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1.2s forwards ease-in-out;
+}
+.loginBtn{
+    padding: 10px 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
+}
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    border: 2px solid #fff;
+}
+
+#profile-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+h1 {
+    font-size: 3.5em;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, #ff6b6b, #6a5acd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    background: linear-gradient(90deg, #ff6b6b, #6a5acd);
+    color: white;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold; /* Improved readability */
+    letter-spacing: 1px; /* Better spacing */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+
+.cta-button:hover {
+    background: linear-gradient(90deg, #6a5acd, #ff6b6b);
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(255, 107, 107, 0.5);
+}
+
+/* Features Section */
+.section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+#features {
+    background: #2222224f;
+    border-radius: 10px;
+    padding: 60px 0;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feature-item img {
+    width: 90px;
+    margin-bottom: 20px;
+    transition: transform 0.4s ease-in-out;
+}
+
+.feature-item img:hover {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* Testimonials */
+#testimonials {
+    background: linear-gradient(135deg, #ff6b6b17, #695acd10);
+    padding: 60px 0;
+    border-radius: 10px;
+}
+
+.testimonial-slider {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.testimonial-item {
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px;
+    background: #1e1e2e02;
+    display: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.testimonial-item.active {
+    display: block;
+}
+
+/* Footer */
+footer {
+    background-color: #11111100;
+    color: rgb(255, 244, 254);
+    text-align: center;
+    padding: 30px 0;
+    border-top: 2px solid #6a5acd;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 2.8em;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+    </style>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div id="profileSection">
+            <a href="login.html" class="loginBtn cta-button">Login</a>
+        </div>
+        
+        
+        <div class="hero">
+            <div class="hero-content animate-fade-in">
+                <h1>Unleash Your Inner Storyteller</h1>
+                <p>Craft immersive and captivating narratives with our interactive story generator.</p>
+                <button class="cta-button" onclick="scrollToSection('features')">Start Your Story</button>
+            </div>
+        </div>
+    <main>
+        <section id="features" class="section animate-slide-in">
+            <div class="container" data-aos="fade-up" data-aos-anchor-placement="center-center">
+                <h2>Key Features & Stories</h2>
+                <div class="features-grid">
+                    <div class="feature-item hover-zoom">
+                        <h3>Dynamic Story Branches</h3>
+                        <p>Your choices shape the narrative, leading to multiple endings.</p>
+                    </div>
+                    <div class="feature-item hover-zoom">
+                        <h3>Customizable Characters</h3>
+                        <p>Design unique characters with detailed backgrounds and personalities.</p>
+                    </div>
+                    <div class="feature-item hover-zoom">
+                        <h3>Multiple Genres</h3>
+                        <p>Explore fantasy, sci-fi, horror, and more—tailored to your taste.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="featured-stories" class="section animate-slide-in">
+            <div class="container" data-aos="fade-up" data-aos-anchor-placement="center-center">
+                <h2>Featured Stories</h2>
+                <div class="stories-grid">
+                    <div class="story-item">
+                        <h3>The Lost Kingdom</h3>
+                        <p><strong>Genre:</strong> Fantasy</p>
+                        <p>Embark on an epic journey to reclaim the lost kingdom from the shadows of history.</p>
+                        <a href="downloads/The_Lost_Kingdom.pdf" class="cta-button" download>Download PDF</a>
+                    </div>
+                    <div class="story-item">
+                        <h3>Echoes of the Future</h3>
+                        <p><strong>Genre:</strong> Science Fiction</p>
+                        <p>A thrilling sci-fi adventure where humanity’s fate rests on the edge of time.</p>
+                        <a href="downloads/Echoes_of_the_Future.pdf" class="cta-button" download>Download PDF</a>
+                    </div>
+                    <div class="story-item">
+                        <h3>Whispers in the Dark</h3>
+                        <p><strong>Genre:</strong> Horror</p>
+                        <p>A chilling tale of an abandoned house that harbors unspeakable secrets.</p>
+                        <a href="downloads/Whispers_in_the_Dark.pdf" class="cta-button" download>Download PDF</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section animate-fade-in">
+            <div class="container" data-aos="fade-up"
+            data-aos-anchor-placement="center-center">
+                <h2>What Our Users Say</h2>
+                <div class="testimonial-slider">
+                    <div class="testimonial-item active">
+                        <p>"StoryCraft has changed the way I write! The branching paths make storytelling so engaging."</p>
+                        <p class="author">- Shibam Basu, Fantasy Writer</p>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"I love how I can create unique characters and truly immersive worlds."</p>
+                        <p class="author">- Puja Ratna Pallavi, Game Developer</p>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"Finally, a tool that brings my ideas to life! The interactive elements are fantastic."</p>
+                        <p class="author">- Gayatri Obroy, IPS</p>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"StoryCraft helps me structure my stories with ease. A must-have for writers!"</p>
+                        <p class="author">- Arnab Mehta, Screenwriter</p>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="prev" onclick="changeTestimonial(-1)">&#10094;</button>
+                    <button class="next" onclick="changeTestimonial(1)">&#10095;</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta-secondary" class="section secondary-cta animate-slide-in">
+            <div class="container" >
+                <h2>Ready to Start Your Adventure?</h2>
+                <button class="cta-button" onclick="scrollToSection('features')">Create Now</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content animate-fade-in">
+            <p>&copy; 2025 StoryCraft. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+  AOS.init({
+    once: true,  // Ensures animation only runs once per session
+    delay: 100,  // Adds a slight delay for smoother effect
+});
+</script>
+</body>
+</html>
