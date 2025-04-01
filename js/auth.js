@@ -8,7 +8,7 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
 
   try {
     // 🌐 Send login request to backend
-    const response = await fetch("https://storygeneratorbackend-ytdf.onrender.com/api/users/login", {
+    const response = await fetch("https://storybanaaobackend.onrender.com/api/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

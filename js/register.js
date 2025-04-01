@@ -16,7 +16,7 @@ document.getElementById("registerForm").addEventListener("submit", async (event)
     if (profilePicture) formData.append("profilePicture", profilePicture);
 
     // 🌐 Send registration request
-    const response = await fetch("https://storygeneratorbackend-ytdf.onrender.com/api/users/register", {
+    const response = await fetch("https://storybanaaobackend.onrender.com/api/users/register", {
       method: "POST",
       body: formData,
     });
