@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Populate profile section
             profileSection.innerHTML = `
-                <div id="profile-section">
+                <div id="profileSection">
                     <img src="${profilePicture || 'default-profile.png'}" alt="Profile Picture" class="profile-pic">
                     <span>${name || 'User'}</span>
                     <button class="cta-button logoutBtn">Logout</button>
