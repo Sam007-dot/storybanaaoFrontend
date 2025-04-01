@@ -124,6 +124,9 @@ p {
     border-radius: 10px;
     padding: 60px 0;
 }
+.hidden {
+    display: none;
+}
 
 .features-grid {
     display: grid;
@@ -245,32 +248,18 @@ footer {
                 </div>
             </div>
         </section>
-        <section id="featured-stories" class="section animate-slide-in">
-            <div class="container" data-aos="fade-up" data-aos-anchor-placement="center-center">
-                <h2>Featured Stories</h2>
-                <div class="stories-grid">
-                    <div class="story-item">
-                        <h3>The Lost Kingdom - Blood Bath </h3>
-                        <p><strong>Genre:</strong> Fantasy</p>
-                        <p>Embark on an epic journey to reclaim the lost kingdom from the shadows of history.</p>
-                        <a href="assets/TheLostKingdom.pdf" class="cta-button" download>Download PDF</a>
-                    </div>
-                    <div class="story-item">
-                        <h3>The Lost Kingdom - The Second Shadow</h3>
-                        <p><strong>Genre:</strong> Fantasy</p>
-                        <p>This is the time and this time he is not the same like before ...not anymore</p>
-                        <a href="assets/TheLostKingdom.pdf" class="cta-button" download>Download PDF</a>
-                    </div>
-                    <div class="story-item">
-                        <h3>The Lost Kingdom - The Last Laugh</h3>
-                        <p><strong>Genre:</strong> Horror</p>
-                        <p>Come and take a look at the journey that harbors unspeakable secrets.</p>
-                        <a href="assets/TheLostKingdom.pdf" class="cta-button" download>Download PDF</a>
-                    </div>
-                </div>
+        <section id="pdfSection" class="hidden">
+            <div class="container">
+                <h2>The Lost Kingdom</h2>
+                <p>This is a preview of the story. Read a part of it before downloading.</p>
+                <iframe src="assets/TheLostKingdom.pdf" width="100%" height="500px"></iframe>
+                <br>
+                <button class="cta-button" onclick="showPDFSection()">Read Now</button>
+
             </div>
         </section>
-
+        
+        
         <section id="testimonials" class="section animate-fade-in">
             <div class="container" data-aos="fade-up"
             data-aos-anchor-placement="center-center">

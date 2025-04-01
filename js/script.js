@@ -64,3 +64,8 @@ function changeTestimonial(direction) {
 
 // Initialize by showing the first testimonial
 showTestimonial(currentTestimonial);
+// pdf section of features
+
+    function showPDFSection() {
+        document.getElementById("pdfSection").classList.toggle("hidden");
+    }
