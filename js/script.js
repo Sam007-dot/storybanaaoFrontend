@@ -64,67 +64,31 @@ function changeTestimonial(direction) {
 
 // Initialize by showing the first testimonial
 showTestimonial(currentTestimonial);
-
-// write story user
 document.addEventListener("DOMContentLoaded", function () {
     const storyTitle = document.getElementById("storyTitle");
-    const storyContent = document.getElementById("storyContent");
+    const storyContent = document.getElementById("storyEditor"); // Updated to match text editor
     const saveBtn = document.getElementById("saveStory");
     const deleteBtn = document.getElementById("deleteStory");
+    const wordWarning = document.getElementById("wordWarning");
 
     // Load saved story from local storage
     if (localStorage.getItem("storyTitle")) {
         storyTitle.value = localStorage.getItem("storyTitle");
     }
     if (localStorage.getItem("storyContent")) {
-        storyContent.value = localStorage.getItem("storyContent");
+        storyContent.innerText = localStorage.getItem("storyContent");
     }
 
     // Auto-save function
     function autoSave() {
         localStorage.setItem("storyTitle", storyTitle.value);
-        localStorage.setItem("storyContent", storyContent.value);
+        localStorage.setItem("storyContent", storyContent.innerText);
         showStatus("Story auto-saved...");
     }
 
     // Save story manually
     saveBtn.addEventListener("click", function () {
-        localStorage.setItem("storyTitle", storyTitle.value);
-        localStorage.setItem("storyContent", storyContent.value);
-        showStatus("Story saved!");
-    });
-
-    // Delete story
-    deleteBtn.addEventListener("click", function () {
-        if (confirm("Are you sure you want to delete this story?")) {
-            localStorage.removeItem("storyTitle");
-            localStorage.removeItem("storyContent");
-            storyTitle.value = "";
-            storyContent.value = "";
-            showStatus("Story deleted.");
-        }
-    });
-
-    // Auto-save every 5 seconds
-    setInterval(autoSave, 5000);
-
-    // Show status message
-    function showStatus(message) {
-        const status = document.getElementById("statusMessage");
-        status.textContent = message;
-        status.style.opacity = 1;
-        setTimeout(() => {
-            status.style.opacity = 0;
-        }, 2000);
-    }
-});
-document.addEventListener("DOMContentLoaded", function() {
-    const editor = document.querySelector(".text-editor");
-    const saveBtn = document.getElementById("saveBtn");
-    const wordWarning = document.getElementById("wordWarning");
-
-    saveBtn.addEventListener("click", function() {
-        let text = editor.innerText.trim();
+        let text = storyContent.innerText.trim();
         let wordCount = text.split(/\s+/).length;
 
         if (wordCount > 1000) {
@@ -135,8 +99,9 @@ document.addEventListener("DOMContentLoaded", function() {
             wordWarning.style.display = "none";
         }
 
-        // Store story in localStorage (simulating save)
-        localStorage.setItem("savedStory", text);
+        localStorage.setItem("storyTitle", storyTitle.value);
+        localStorage.setItem("storyContent", storyContent.innerText);
+        showStatus("Story saved!");
 
         // Check if user is logged in
         let isLoggedIn = localStorage.getItem("userLoggedIn");
@@ -149,16 +114,42 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Word Count Live Checker
-    editor.addEventListener("input", function() {
-        let text = editor.innerText.trim();
+    // Delete story
+    deleteBtn.addEventListener("click", function () {
+        if (confirm("Are you sure you want to delete this story?")) {
+            localStorage.removeItem("storyTitle");
+            localStorage.removeItem("storyContent");
+            storyTitle.value = "";
+            storyContent.innerText = "";
+            showStatus("Story deleted.");
+        }
+    });
+
+    // Auto-save every 5 seconds
+    setInterval(autoSave, 5000);
+
+    // Live Word Count Checker
+    storyContent.addEventListener("input", function () {
+        let text = storyContent.innerText.trim();
         let wordCount = text.split(/\s+/).length;
 
         if (wordCount > 1000) {
             wordWarning.style.display = "block";
             wordWarning.innerText = "⚠️ Word limit exceeded (Max 1000 words)!";
+            let trimmedText = text.split(/\s+/).slice(0, 1000).join(" ");
+            storyContent.innerText = trimmedText;
         } else {
             wordWarning.style.display = "none";
         }
     });
+
+    // Show status messages smoothly
+    function showStatus(message) {
+        const status = document.getElementById("statusMessage");
+        status.textContent = message;
+        status.style.opacity = 1;
+        setTimeout(() => {
+            status.style.opacity = 0;
+        }, 2000);
+    }
 });

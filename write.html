@@ -7,16 +7,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="overlay"></div>
+
     <div class="container">
         <header>
             <h1>Write Your Story</h1>
-            <button id="save-btn">Save</button>
         </header>
-        <div id="editor" contenteditable="true" placeholder="Start writing your story..."></div>
-        <footer>
-            <span id="word-count">Words: 0</span>
-        </footer>
+
+        <!-- Text Editor -->
+        <div contenteditable="true" class="text-editor" id="storyEditor" oninput="countWords()"></div>
+
+        <!-- Word Count Warning -->
+        <p class="word-warning" id="wordWarning">You have reached the 1000-word limit!</p>
+
+        <!-- Buttons -->
+        <div class="buttons">
+            <button onclick="saveStory()">Save Story</button>
+            <button class="delete" onclick="clearEditor()">Clear</button>
+        </div>
     </div>
-    <script src="script.js"></script>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
