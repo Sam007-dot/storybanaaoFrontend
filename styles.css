@@ -77,6 +77,12 @@ nav ul li a, #darkModeToggle {
     border-radius: 5px;
     background: #fff;
 }
+.story-editor:empty:before {
+    content: "Start writing your story...";
+    color: gray;
+    font-style: italic;
+}
+
 
 /* Word Count */
 .word-count {
