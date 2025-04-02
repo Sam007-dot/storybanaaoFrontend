@@ -60,4 +60,4 @@ function changeTestimonial(direction) {
         currentTestimonial = totalTestimonials - 1;
     }
 }
-    showTestimonial(currentTestimonial);
+showTestimonial(currentTestimonial);
