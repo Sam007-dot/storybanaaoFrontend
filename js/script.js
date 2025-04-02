@@ -118,3 +118,47 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 2000);
     }
 });
+document.addEventListener("DOMContentLoaded", function() {
+    const editor = document.querySelector(".text-editor");
+    const saveBtn = document.getElementById("saveBtn");
+    const wordWarning = document.getElementById("wordWarning");
+
+    saveBtn.addEventListener("click", function() {
+        let text = editor.innerText.trim();
+        let wordCount = text.split(/\s+/).length;
+
+        if (wordCount > 1000) {
+            wordWarning.style.display = "block";
+            wordWarning.innerText = "⚠️ You have exceeded the 1000-word limit!";
+            return;
+        } else {
+            wordWarning.style.display = "none";
+        }
+
+        // Store story in localStorage (simulating save)
+        localStorage.setItem("savedStory", text);
+
+        // Check if user is logged in
+        let isLoggedIn = localStorage.getItem("userLoggedIn");
+
+        if (!isLoggedIn) {
+            alert("Please log in first to view your story.");
+            window.location.href = "login.html";
+        } else {
+            window.location.href = "storybook.html";
+        }
+    });
+
+    // Word Count Live Checker
+    editor.addEventListener("input", function() {
+        let text = editor.innerText.trim();
+        let wordCount = text.split(/\s+/).length;
+
+        if (wordCount > 1000) {
+            wordWarning.style.display = "block";
+            wordWarning.innerText = "⚠️ Word limit exceeded (Max 1000 words)!";
+        } else {
+            wordWarning.style.display = "none";
+        }
+    });
+});
