@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Populate profile section
             profileSection.innerHTML = `
                 <div id="profileSection">
-        <div class="userP">
-                    <img src="${profilePicture || 'default-profile.png'}" alt="Profile Picture" class="profile-pic">
-                    <span>${name || 'User'}</span>
+                    <div class="userP">
+                        <img src="${profilePicture || 'default-profile.png'}" alt="Profile Picture" class="profile-pic">
+                        <span>${name || 'User'}</span>
                     </div>
                     <button class="cta-button logoutBtn">Logout</button>
                 </div>
@@ -41,30 +41,42 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
         profileSection.innerHTML = `<a href="login.html" class="loginBtn cta-button">Login</a>`;
     }
-});
-let currentTestimonial = 0;
-const testimonials = document.querySelectorAll('.testimonial-item');
-const totalTestimonials = testimonials.length;
 
-function showTestimonial(index) {
-    testimonials.forEach((item, i) => {
-        item.style.display = i === index ? 'block' : 'none';
-    });
-}
+    // ================== FIXED TESTIMONIAL SLIDER ==================
 
-function changeTestimonial(direction) {
-    currentTestimonial += direction;
-    if (currentTestimonial >= totalTestimonials) {
-        currentTestimonial = 0;
-    } else if (currentTestimonial < 0) {
-        currentTestimonial = totalTestimonials - 1;
+    let currentTestimonial = 0;
+    const testimonials = document.querySelectorAll('.testimonial-item');
+    const totalTestimonials = testimonials.length;
+
+    function showTestimonial(index) {
+        testimonials.forEach((item, i) => {
+            item.style.display = i === index ? 'block' : 'none';
+        });
     }
-}
-showTestimonial(currentTestimonial);
 
-// Wait for DOM to load
-document.addEventListener("DOMContentLoaded", () => {
-    // Elements
+    function changeTestimonial(direction) {
+        currentTestimonial += direction;
+        if (currentTestimonial >= totalTestimonials) {
+            currentTestimonial = 0;
+        } else if (currentTestimonial < 0) {
+            currentTestimonial = totalTestimonials - 1;
+        }
+        showTestimonial(currentTestimonial);
+    }
+
+    // Attach event listeners to buttons
+    document.querySelector(".prev").addEventListener("click", () => changeTestimonial(-1));
+    document.querySelector(".next").addEventListener("click", () => changeTestimonial(1));
+
+    // Auto-slide every 5 seconds
+    setInterval(() => {
+        changeTestimonial(1);
+    }, 5000);
+
+    showTestimonial(currentTestimonial); // Initial display
+
+    // ================== STORY EDITOR FEATURES ==================
+
     const storyContent = document.getElementById("storyContent");
     const boldBtn = document.getElementById("boldBtn");
     const italicBtn = document.getElementById("italicBtn");
