@@ -87,6 +87,36 @@
         button:hover {
             background: #0056b3;
         }
+        .story-scroll {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.scroll-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 10px;
+    white-space: nowrap;
+}
+
+.story-card {
+    width: 150px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.24);
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.story-card:hover {
+    transform: scale(1.05);
+}
+
     </style>
 </head>
 <body>
@@ -102,7 +132,11 @@
                 <h1>More Pages Coming Soon...</h1>
             </div>
         </div>
+    </div><div class="story-scroll">
+        <h2>Explore Other Stories</h2>
+        <div class="scroll-container" id="storyList"></div>
     </div>
+    
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -121,6 +155,28 @@
         function turnPage() {
             document.querySelector('.book').classList.toggle('flipped');
         }
+        document.addEventListener("DOMContentLoaded", function() {
+    let stories = JSON.parse(localStorage.getItem("stories")) || [];
+    let storyList = document.getElementById("storyList");
+
+    if (stories.length === 0) {
+        storyList.innerHTML = "<p>No stories available.</p>";
+    } else {
+        stories.forEach((story, index) => {
+            let storyCard = document.createElement("div");
+            storyCard.className = "story-card";
+            storyCard.innerText = story.title;
+            storyCard.onclick = () => openStory(index);
+            storyList.appendChild(storyCard);
+        });
+    }
+});
+
+function openStory(index) {
+    localStorage.setItem("savedStory", JSON.parse(localStorage.getItem("stories"))[index].content);
+    window.location.href = "book.html";
+}
+
     </script>
 </body>
 </html>
