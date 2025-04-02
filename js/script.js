@@ -42,8 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         profileSection.innerHTML = `<a href="login.html" class="loginBtn cta-button">Login</a>`;
     }
 
-    // ================== FIXED TESTIMONIAL SLIDER ==================
-
+    // ================== TESTIMONIAL SLIDER ==================
     let currentTestimonial = 0;
     const testimonials = document.querySelectorAll('.testimonial-item');
     const totalTestimonials = testimonials.length;
@@ -64,19 +63,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         showTestimonial(currentTestimonial);
     }
 
-    // Attach event listeners to buttons
-    document.querySelector(".prev").addEventListener("click", () => changeTestimonial(-1));
-    document.querySelector(".next").addEventListener("click", () => changeTestimonial(1));
-
-    // Auto-slide every 5 seconds
-    setInterval(() => {
-        changeTestimonial(1);
-    }, 5000);
-
-    showTestimonial(currentTestimonial); // Initial display
+    document.querySelector(".prev")?.addEventListener("click", () => changeTestimonial(-1));
+    document.querySelector(".next")?.addEventListener("click", () => changeTestimonial(1));
+    setInterval(() => changeTestimonial(1), 5000);
+    showTestimonial(currentTestimonial);
 
     // ================== STORY EDITOR FEATURES ==================
-
     const storyContent = document.getElementById("storyContent");
     const boldBtn = document.getElementById("boldBtn");
     const italicBtn = document.getElementById("italicBtn");
@@ -90,34 +82,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     const publishStoryBtn = document.getElementById("publishStory");
     const darkModeToggle = document.getElementById("darkModeToggle");
 
-    // Create a word count display
+    // Create and display word count
     const wordCount = document.createElement("p");
     wordCount.id = "wordCount";
     wordCount.style.marginTop = "10px";
-    storyContent.parentNode.appendChild(wordCount);
+    storyContent?.parentNode.appendChild(wordCount);
 
-    // Update word count
     function updateWordCount() {
         const text = storyContent.innerText.trim();
         const words = text.split(/\s+/).filter(word => word.length > 0);
         wordCount.innerText = `Word Count: ${words.length}`;
     }
 
-    // Apply formatting
     function applyFormat(command) {
         document.execCommand(command, false, null);
     }
 
-    // Formatting buttons
-    boldBtn.addEventListener("click", () => applyFormat("bold"));
-    italicBtn.addEventListener("click", () => applyFormat("italic"));
-    underlineBtn.addEventListener("click", () => applyFormat("underline"));
-    strikeBtn.addEventListener("click", () => applyFormat("strikeThrough"));
-    bulletList.addEventListener("click", () => applyFormat("insertUnorderedList"));
-    numberList.addEventListener("click", () => applyFormat("insertOrderedList"));
-    clearFormatting.addEventListener("click", () => applyFormat("removeFormat"));
+    [boldBtn, italicBtn, underlineBtn, strikeBtn, bulletList, numberList, clearFormatting].forEach(button => {
+        button?.addEventListener("click", () => applyFormat(button.id.replace("Btn", "")));
+    });
 
-    // Add choice section for branching story
     function addChoice() {
         const lastChoice = storyContent.querySelector(".choice-text:last-child");
         if (lastChoice && lastChoice.innerText.trim() === "Type your choice here...") {
@@ -144,43 +128,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         choiceInput.focus();
     }
 
-    addChoiceBtn.addEventListener("click", addChoice);
+    addChoiceBtn?.addEventListener("click", addChoice);
 
-    // Auto-save draft every 5 seconds
     setInterval(() => {
-        localStorage.setItem("draftStory", storyContent.innerHTML);
+        if (storyContent.innerHTML !== localStorage.getItem("draftStory")) {
+            localStorage.setItem("draftStory", storyContent.innerHTML);
+        }
     }, 5000);
 
-    // Manual Save Draft
-    saveDraftBtn.addEventListener("click", () => {
+    saveDraftBtn?.addEventListener("click", () => {
         localStorage.setItem("draftStory", storyContent.innerHTML);
         alert("Draft saved!");
     });
 
-    // Load saved draft
     window.addEventListener("load", () => {
         const savedStory = localStorage.getItem("draftStory");
         if (savedStory) {
             storyContent.innerHTML = savedStory;
             updateWordCount();
-
-            // Reattach event listeners for choices
-            document.querySelectorAll(".remove-choice").forEach(button => {
-                button.addEventListener("click", () => button.parentElement.remove());
-            });
         }
     });
 
-    // Track word count
-    storyContent.addEventListener("input", updateWordCount);
+    storyContent?.addEventListener("input", updateWordCount);
 
-    // Publish Story and Redirect
-    publishStoryBtn.addEventListener("click", () => {
+    publishStoryBtn?.addEventListener("click", () => {
         alert("Story published successfully!");
-        window.location.href = "index.html"; // Redirect to the story list page
+        window.location.href = "index.html";
     });
 
-    // Dark Mode Toggle
     if (darkModeToggle) {
         if (localStorage.getItem("darkMode") === "enabled") {
             document.body.classList.add("dark-mode");
