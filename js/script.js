@@ -153,3 +153,53 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 2000);
     }
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const editor = document.getElementById("storyEditor");
+    const wordWarning = document.getElementById("wordWarning");
+    let wordLimit = 1000;
+
+    // Load saved story
+    let savedStory = localStorage.getItem("savedStory");
+    if (savedStory) {
+        editor.innerHTML = savedStory;
+    }
+
+    // Auto-save function
+    function autoSave() {
+        localStorage.setItem("savedStory", editor.innerHTML);
+    }
+
+    // Count words and display warning if needed
+    function countWords() {
+        let text = editor.innerText.trim();
+        let words = text.split(/\s+/).filter(word => word.length > 0);
+        
+        if (words.length >= wordLimit) {
+            wordWarning.style.display = "block";
+        } else {
+            wordWarning.style.display = "none";
+        }
+    }
+
+    // Save story manually
+    window.saveStory = function () {
+        autoSave();
+        alert("Story saved successfully!");
+        window.location.href = "book.html"; // Navigate to book page
+    }
+
+    // Clear editor content
+    window.clearEditor = function () {
+        if (confirm("Are you sure you want to clear your story?")) {
+            editor.innerHTML = "";
+            autoSave();
+        }
+    }
+
+    // Listen for input changes
+    editor.addEventListener("input", function () {
+        countWords();
+        autoSave();
+    });
+});
+

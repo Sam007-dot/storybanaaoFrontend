@@ -3,86 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Story</title>
+    <title>My Storybook</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="js/book.js" defer></script>
 </head>
 <body>
-    <div class="storybook-container">
-        <div class="book">
-            <div class="page">
-                <h1>Your Story</h1>
-                <p id="storyContent"></p>
-                <button onclick="goBack()">Back to Home</button>
+    <div class="storybook">
+        <div class="book-container">
+            <div class="page left-page">
+                <div class="page-content" id="pageContent1"></div>
+                <button class="prev-btn" onclick="prevPage()">◀ Prev</button>
+            </div>
+            <div class="page right-page">
+                <div class="page-content" id="pageContent2"></div>
+                <button class="next-btn" onclick="nextPage()">Next ▶</button>
             </div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let savedStory = localStorage.getItem("savedStory");
-            if (!savedStory) {
-                document.getElementById("storyContent").innerText = "No story found.";
-            } else {
-                document.getElementById("storyContent").innerText = savedStory;
-            }
-        });
-
-        function goBack() {
-            window.location.href = "index.html";
-        }
-    </script>
-
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: url('https://wallpapersmug.com/download/3840x2160/fc1404/red-warrior-daredevil.jpg') no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .storybook-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        .book {
-            width: 600px;
-            height: 400px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-
-        .page {
-            overflow-y: auto;
-            max-height: 350px;
-            font-size: 18px;
-            line-height: 1.6;
-            padding: 10px;
-        }
-
-        button {
-            margin-top: 20px;
-            background: #007BFF;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-    </style>
 </body>
 </html>
