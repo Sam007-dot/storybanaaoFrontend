@@ -61,3 +61,51 @@ function changeTestimonial(direction) {
     }
 }
 showTestimonial(currentTestimonial);
+
+
+// editor section
+// Select elements
+const storyContent = document.getElementById("storyContent");
+const boldBtn = document.getElementById("boldBtn");
+const italicBtn = document.getElementById("italicBtn");
+const underlineBtn = document.getElementById("underlineBtn");
+const addChoiceBtn = document.getElementById("addChoice");
+const saveDraftBtn = document.getElementById("saveDraft");
+const publishStoryBtn = document.getElementById("publishStory");
+
+// Function to apply formatting
+function applyFormat(command) {
+    document.execCommand(command, false, null);
+}
+
+boldBtn.addEventListener("click", () => applyFormat("bold"));
+italicBtn.addEventListener("click", () => applyFormat("italic"));
+underlineBtn.addEventListener("click", () => applyFormat("underline"));
+
+// Function to add a choice section
+addChoiceBtn.addEventListener("click", () => {
+    const choice = document.createElement("div");
+    choice.classList.add("choice-block");
+    choice.contentEditable = true;
+    choice.innerText = "Type your choice here...";
+    storyContent.appendChild(choice);
+});
+
+// Save Draft (Temporary in LocalStorage)
+saveDraftBtn.addEventListener("click", () => {
+    localStorage.setItem("draftStory", storyContent.innerHTML);
+    alert("Draft saved!");
+});
+
+// Load saved draft if exists
+window.addEventListener("load", () => {
+    const savedStory = localStorage.getItem("draftStory");
+    if (savedStory) {
+        storyContent.innerHTML = savedStory;
+    }
+});
+
+// Publish Story (Placeholder functionality)
+publishStoryBtn.addEventListener("click", () => {
+    alert("Story published (backend integration needed)!");
+});

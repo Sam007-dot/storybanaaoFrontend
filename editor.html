@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Editor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="editor.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo">StoryBanao</a>
+            <nav>
+                <ul>
+                    <li><a href="mystories.html">My Stories</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="editor-container">
+        <section id="editor">
+            <div class="editor-toolbar">
+                <button class="tool-btn" id="boldBtn">B</button>
+                <button class="tool-btn" id="italicBtn">I</button>
+                <button class="tool-btn" id="underlineBtn">U</button>
+                <button class="tool-btn" id="addChoice">+ Choice</button>
+            </div>
+            <div contenteditable="true" id="storyContent" class="story-editor" placeholder="Start writing your story..."></div>
+        </section>
+        
+        <div class="editor-controls">
+            <button class="cta-button" id="saveDraft">Save Draft</button>
+            <button class="cta-button" id="publishStory">Publish</button>
+        </div>
+    </main>
+    
+    <script src="editor.js"></script>
+</body>
+</html>
