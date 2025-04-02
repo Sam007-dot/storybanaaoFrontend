@@ -1,7 +1,7 @@
 /* General Page Styling */
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('omni.jpg') no-repeat center center fixed;
+    background: url('assets/images/omni.jpg') no-repeat center center fixed;
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: white;
+    
 }
 
 .overlay {
@@ -44,15 +44,15 @@ header {
 
 h1 {
     font-size: 32px;
-    color: white;
+    color: rgb(27, 5, 5);
     margin: 0;
 }
 
 /* Text Editor */
 .text-editor {
-    width: 100%;
     min-height: 600px; /* Increased height */
     max-height: 600px;
+    max-width: 500px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     padding: 15px;
@@ -61,7 +61,6 @@ h1 {
     outline: none;
     resize: none;
     background: rgba(255, 255, 255, 0.2);
-    color: white;
     overflow-y: auto;
     transition: border 0.3s ease-in-out;
 }
