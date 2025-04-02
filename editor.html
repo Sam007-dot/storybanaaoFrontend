@@ -8,18 +8,28 @@
 </head>
 <body>
     <header>
-          <li><a href="index.html">My Stories</a></li>
+        <nav>
+            <ul>
+                <li><a href="index.html">My Stories</a></li>
+                <li><button id="darkModeToggle">🌙</button></li>
+            </ul>
+        </nav>
     </header>
     
     <main class="editor-container">
         <section id="editor">
             <div class="editor-toolbar">
-                <button class="tool-btn" id="boldBtn">B</button>
-                <button class="tool-btn" id="italicBtn">I</button>
-                <button class="tool-btn" id="underlineBtn">U</button>
+                <button class="tool-btn" id="boldBtn"><b>B</b></button>
+                <button class="tool-btn" id="italicBtn"><i>I</i></button>
+                <button class="tool-btn" id="underlineBtn"><u>U</u></button>
+                <button class="tool-btn" id="strikeBtn"><s>S</s></button>
+                <button class="tool-btn" id="bulletList">• List</button>
+                <button class="tool-btn" id="numberList">1. List</button>
+                <button class="tool-btn" id="clearFormatting">Clear</button>
                 <button class="tool-btn" id="addChoice">+ Choice</button>
             </div>
             <div contenteditable="true" id="storyContent" class="story-editor" placeholder="Start writing your story..."></div>
+            <p class="word-count">Word Count: <span id="wordCount">0</span></p>
         </section>
         
         <div class="editor-controls">

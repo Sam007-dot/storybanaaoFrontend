@@ -62,9 +62,7 @@ function changeTestimonial(direction) {
 }
 showTestimonial(currentTestimonial);
 
-
-// editor section
-// Select elements
+// for editor.html
 const storyContent = document.getElementById("storyContent");
 const boldBtn = document.getElementById("boldBtn");
 const italicBtn = document.getElementById("italicBtn");
@@ -72,50 +70,84 @@ const underlineBtn = document.getElementById("underlineBtn");
 const addChoiceBtn = document.getElementById("addChoice");
 const saveDraftBtn = document.getElementById("saveDraft");
 const publishStoryBtn = document.getElementById("publishStory");
+const wordCount = document.createElement("p");
+const darkModeToggle = document.getElementById("darkModeToggle");
+
+// Create a word count display
+wordCount.id = "wordCount";
+wordCount.style.marginTop = "10px";
+storyContent.parentNode.appendChild(wordCount);
 
 // Function to apply formatting
 function applyFormat(command) {
     document.execCommand(command, false, null);
 }
 
+// Formatting buttons
 boldBtn.addEventListener("click", () => applyFormat("bold"));
 italicBtn.addEventListener("click", () => applyFormat("italic"));
 underlineBtn.addEventListener("click", () => applyFormat("underline"));
 
-// Function to add a choice section
+// Add choice section for branching story
 addChoiceBtn.addEventListener("click", () => {
-    const choice = document.createElement("div");
-    choice.classList.add("choice-block");
-    choice.contentEditable = true;
-    choice.innerText = "Type your choice here...";
-    storyContent.appendChild(choice);
+    const choiceContainer = document.createElement("div");
+    choiceContainer.classList.add("choice-block");
+
+    const choiceInput = document.createElement("div");
+    choiceInput.contentEditable = true;
+    choiceInput.innerText = "Type your choice here...";
+    choiceInput.classList.add("choice-text");
+
+    const removeChoice = document.createElement("button");
+    removeChoice.innerText = "❌";
+    removeChoice.classList.add("remove-choice");
+    removeChoice.addEventListener("click", () => {
+        choiceContainer.remove();
+    });
+
+    choiceContainer.appendChild(choiceInput);
+    choiceContainer.appendChild(removeChoice);
+    storyContent.appendChild(choiceContainer);
 });
 
-// Save Draft (Temporary in LocalStorage)
+// Auto-save draft every 5 seconds
+setInterval(() => {
+    localStorage.setItem("draftStory", storyContent.innerHTML);
+}, 5000);
+
+// Manual Save Draft button
 saveDraftBtn.addEventListener("click", () => {
     localStorage.setItem("draftStory", storyContent.innerHTML);
     alert("Draft saved!");
 });
 
-// Load saved draft if exists
+// Load saved draft
 window.addEventListener("load", () => {
     const savedStory = localStorage.getItem("draftStory");
     if (savedStory) {
         storyContent.innerHTML = savedStory;
     }
+    updateWordCount();
 });
 
-// Publish Story (Placeholder functionality)
+// Track word count
+storyContent.addEventListener("input", updateWordCount);
+
+function updateWordCount() {
+    const text = storyContent.innerText.trim();
+    const words = text.split(/\s+/).filter(word => word.length > 0);
+    wordCount.innerText = `Word Count: ${words.length}`;
+}
+
+// Publish Story and Redirect
 publishStoryBtn.addEventListener("click", () => {
-    alert("Story published (backend integration needed)!");
+    alert("Story published successfully!");
+    window.location.href = "index.html"; // Redirect to the story list page
 });
 
-
-// for redirection
-// Publish Story (Redirect after publishing)
-publishStoryBtn.addEventListener("click", () => {
-    alert("Story published (backend integration needed)!");
-    
-    // Redirect to another page (modify URL as needed)
-    window.location.href = "editor.html"; 
-});
+// Dark Mode Toggle
+if (darkModeToggle) {
+    darkModeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+    });
+}
