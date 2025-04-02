@@ -4,31 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Write Your Story</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Start Your Story</h1>
-    </header>
-
-    <main>
-        <textarea id="storyContent" placeholder="Start writing your story here..."></textarea>
-        <button onclick="saveStory()">Save Story</button>
-    </main>
-
-    <script>
-        function saveStory() {
-            const content = document.getElementById("storyContent").value;
-
-            fetch('/save-story', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ story: content })
-            })
-            .then(response => response.json())
-            .then(data => alert(data.message))
-            .catch(error => console.error('Error:', error));
-        }
-    </script>
+    <div class="container">
+        <header>
+            <h1>Write Your Story</h1>
+            <button id="save-btn">Save</button>
+        </header>
+        <div id="editor" contenteditable="true" placeholder="Start writing your story..."></div>
+        <footer>
+            <span id="word-count">Words: 0</span>
+        </footer>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

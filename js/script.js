@@ -64,3 +64,57 @@ function changeTestimonial(direction) {
 
 // Initialize by showing the first testimonial
 showTestimonial(currentTestimonial);
+
+// write story user
+document.addEventListener("DOMContentLoaded", function () {
+    const storyTitle = document.getElementById("storyTitle");
+    const storyContent = document.getElementById("storyContent");
+    const saveBtn = document.getElementById("saveStory");
+    const deleteBtn = document.getElementById("deleteStory");
+
+    // Load saved story from local storage
+    if (localStorage.getItem("storyTitle")) {
+        storyTitle.value = localStorage.getItem("storyTitle");
+    }
+    if (localStorage.getItem("storyContent")) {
+        storyContent.value = localStorage.getItem("storyContent");
+    }
+
+    // Auto-save function
+    function autoSave() {
+        localStorage.setItem("storyTitle", storyTitle.value);
+        localStorage.setItem("storyContent", storyContent.value);
+        showStatus("Story auto-saved...");
+    }
+
+    // Save story manually
+    saveBtn.addEventListener("click", function () {
+        localStorage.setItem("storyTitle", storyTitle.value);
+        localStorage.setItem("storyContent", storyContent.value);
+        showStatus("Story saved!");
+    });
+
+    // Delete story
+    deleteBtn.addEventListener("click", function () {
+        if (confirm("Are you sure you want to delete this story?")) {
+            localStorage.removeItem("storyTitle");
+            localStorage.removeItem("storyContent");
+            storyTitle.value = "";
+            storyContent.value = "";
+            showStatus("Story deleted.");
+        }
+    });
+
+    // Auto-save every 5 seconds
+    setInterval(autoSave, 5000);
+
+    // Show status message
+    function showStatus(message) {
+        const status = document.getElementById("statusMessage");
+        status.textContent = message;
+        status.style.opacity = 1;
+        setTimeout(() => {
+            status.style.opacity = 0;
+        }, 2000);
+    }
+});
