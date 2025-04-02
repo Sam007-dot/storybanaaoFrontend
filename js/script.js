@@ -59,29 +59,5 @@ function changeTestimonial(direction) {
     } else if (currentTestimonial < 0) {
         currentTestimonial = totalTestimonials - 1;
     }
-    showTestimonial(currentTestimonial);
 }
-
-// Initialize by showing the first testimonial
-showTestimonial(currentTestimonial);
-document.addEventListener("DOMContentLoaded", function () {
-    const storyTitle = document.getElementById("storyTitle");
-    const storyContent = document.getElementById("storyEditor"); // Updated to match text editor
-    const saveBtn = document.getElementById("saveStory");
-    const deleteBtn = document.getElementById("deleteStory");
-    const wordWarning = document.getElementById("wordWarning");
-
-    // Load saved story from local storage
-    if (localStorage.getItem("storyTitle")) {
-        storyTitle.value = localStorage.getItem("storyTitle");
-    }
-    if (localStorage.getItem("storyContent")) {
-        storyContent.innerText = localStorage.getItem("storyContent");
-    }
-
-    // Auto-save function
-    function autoSave() {
-        localStorage.setItem("storyTitle", storyTitle.value);
-        localStorage.setItem("storyContent", storyContent.innerText);
-        showStatus("Story auto-saved...");
-    }
+    showTestimonial(currentTestimonial);
