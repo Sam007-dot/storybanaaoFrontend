@@ -1,7 +1,7 @@
 /* General Page Styling */
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('omni.jpg') no-repeat center center fixed;
+    background: url('assets/images/omni.jpg') no-repeat center center fixed;
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -27,7 +27,7 @@ body {
     max-height: 500px;
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 50px;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(8px);
     position: relative;
