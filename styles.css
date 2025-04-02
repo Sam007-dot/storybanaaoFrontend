@@ -186,7 +186,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: white;
+    background: rgba(255, 255, 255, 0.089);
     border-radius: 10px;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -211,7 +211,7 @@ body {
 
 button {
     background: #ff4081;
-    color: white;
+    color: rgb(108, 30, 197);
     padding: 10px 15px;
     border: none;
     border-radius: 50px;
