@@ -202,4 +202,13 @@ document.addEventListener("DOMContentLoaded", function () {
         autoSave();
     });
 });
+// template
+const templates = {
+    fantasy: "Once upon a time in a mystical kingdom...",
+    "sci-fi": "In the year 3045, humanity discovered a portal to another dimension..."
+};
 
+function applyTemplate() {
+    let selectedTemplate = document.getElementById("storyTemplate").value;
+    document.getElementById("storyEditor").innerText = templates[selectedTemplate] || "";
+}

@@ -26,6 +26,15 @@
             <button class="delete" onclick="clearEditor()">Clear</button>
         </div>
     </div>
+    <div class="template-selection">
+        <label for="storyTemplate">Choose a Template:</label>
+        <select id="storyTemplate" onchange="applyTemplate()">
+            <option value="">Blank Story</option>
+            <option value="fantasy">Fantasy Adventure</option>
+            <option value="sci-fi">Sci-Fi Journey</option>
+        </select>
+    </div>
+    
 
     <script src="js/script.js"></script>
 </body>
