@@ -117,5 +117,5 @@ publishStoryBtn.addEventListener("click", () => {
     alert("Story published (backend integration needed)!");
     
     // Redirect to another page (modify URL as needed)
-    window.location.href = "published_stories.html"; 
+    window.location.href = "editor.html"; 
 });
