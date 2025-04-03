@@ -178,6 +178,15 @@ iframe {
     background: linear-gradient(135deg, #ff4da6, #7a00ff);
     transform: scale(1.05);
 }
+/* for particle.s */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(18,18,50,1) 0%, rgba(5,5,30,1) 100%);
+    z-index: -1;
+}
+
 
 /* Testimonials */
 #testimonials {
@@ -248,9 +257,13 @@ footer {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
 </head>
 <body>
     <header>
+        <div id="particles-js"></div>
+
         <div id="profileSection">
             <a href="login.html" class="loginBtn cta-button">Login</a>
         </div>
@@ -285,7 +298,9 @@ footer {
         </section>
         <div class="pdf-container">
             <h2>📜 Read "The Lost Kingdom"</h2>
-            <iframe id="pdfViewer" src="TheLostKingdom.pdf"></iframe>
+            <iframe src="/assets/TheLostKingdom.pdf"></iframe>
+<a href="/assets/TheLostKingdom.pdf" download>Download PDF</a>
+
             <div class="pdf-controls">
                 <button id="fullscreenPDF">🔎 Fullscreen</button>
                 <button id="downloadPDF">⬇️ Download PDF</button>
