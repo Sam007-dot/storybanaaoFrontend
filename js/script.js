@@ -69,15 +69,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     showTestimonial(currentTestimonial);
 
 });
-particlesJS("particles-js", {
-    particles: {
-        number: { value: 100 },
-        shape: { type: "circle" },
-        opacity: { value: 0.5 },
-        size: { value: 2 },
-        move: { speed: 1 }
-    }
-});
+
+
+// particlesJS("particles-js", {
+//     particles: {
+//         number: { value: 100 },
+//         shape: { type: "circle" },
+//         opacity: { value: 0.5 },
+//         size: { value: 2 },
+//         move: { speed: 1 }
+//     }
+// });
 
 
 
