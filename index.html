@@ -284,9 +284,14 @@ footer {
             </div>
         </section>
         <div class="pdf-container">
-            <iframe id="pdfViewer" src="TheLostKingdom.pdf" width="100%" height="500px"></iframe>
-            <button id="downloadPDF">📥 Download</button>
+            <h2>📜 Read "The Lost Kingdom"</h2>
+            <iframe id="pdfViewer" src="TheLostKingdom.pdf"></iframe>
+            <div class="pdf-controls">
+                <button id="fullscreenPDF">🔎 Fullscreen</button>
+                <button id="downloadPDF">⬇️ Download PDF</button>
+            </div>
         </div>
+        
         
         <script>
             document.getElementById("downloadPDF").addEventListener("click", () => {
@@ -298,6 +303,20 @@ footer {
                 link.click();
                 document.body.removeChild(link);
             });
+            document.getElementById("fullscreenPDF").addEventListener("click", () => {
+    const viewer = document.getElementById("pdfViewer");
+    if (viewer.requestFullscreen) {
+        viewer.requestFullscreen();
+    } else if (viewer.mozRequestFullScreen) {
+        viewer.mozRequestFullScreen(); // Firefox
+    } else if (viewer.webkitRequestFullscreen) {
+        viewer.webkitRequestFullscreen(); // Chrome, Safari, and Opera
+    } else if (viewer.msRequestFullscreen) {
+        viewer.msRequestFullscreen(); // Internet Explorer
+    }
+});
+
+            
         </script>
         
         
