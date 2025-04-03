@@ -54,8 +54,41 @@
         }
         #editor-title {
             font-size: 2rem;
+            border: none;
             border-bottom: 2px solid white;
             padding-bottom: 10px;
+            background-color: transparent;
+            width: 100%;
+            color: whitesmoke;
+            outline: none;
+        }
+        #editor-content{
+            display: block;
+            width: 100%;
+            height: 350px;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            padding: 10px;
+            color: whitesmoke;
+        }
+        #submit-button {
+            margin-top: 10px;
+            padding: 10px;
+            background: linear-gradient(45deg, #1e90ff, #00bfff);
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #submit-button:hover {
+            background: linear-gradient(45deg, #00bfff, #1e90ff);
+        }
+        @media screen and (max-width: 760px) {
+            #editor-container{
+                display: block;
+            }
         }
     </style>
 </head>
@@ -63,28 +96,35 @@
     <div id="editor-container">
         <aside id="toolbar">
             <h2>Tools</h2>
-        
             <button id="toggle-font">Change Font</button>
             <button id="add-image">Add Image</button>
         </aside>
-        <main id="editor-area" contenteditable="true">
-            <h1 id="editor-title" contenteditable="true">Your Story Title</h1>
-            <p>Start writing your immersive story here...</p>
+        <main id="editor-area">
+            <form id="story-form">
+                <input type="text" id="editor-title" name="title" placeholder="Your Story Title" required>
+                <textarea id="editor-content" name="content" placeholder="Start writing your immersive story here..." required></textarea>
+                <button type="submit" id="submit-button">Submit Story</button>
+            </form>
         </main>
     </div>
     <script>
-
         document.getElementById('add-image').addEventListener('click', function() {
             const imageUrl = prompt('Enter image URL:');
             if (imageUrl) {
                 const img = document.createElement('img');
                 img.src = imageUrl;
                 img.style.maxWidth = '100%';
-                document.getElementById('editor-area').appendChild(img);
+                document.getElementById('editor-content').appendChild(img);
             }
         });
 
-       
+        document.getElementById('story-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const title = document.getElementById('editor-title').value;
+            const content = document.getElementById('editor-content').value;
+            console.log('Story Submitted:', { title, content });
+            alert('Your story has been submitted!');
+        });
     </script>
 </body>
 </html>
