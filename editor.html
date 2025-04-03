@@ -63,11 +63,9 @@
     <div id="editor-container">
         <aside id="toolbar">
             <h2>Tools</h2>
-            <button id="toggle-theme">Toggle Theme</button>
+        
             <button id="toggle-font">Change Font</button>
             <button id="add-image">Add Image</button>
-            <button id="show-moodboard">Mood Board</button>
-            <button id="feedback">Feedback</button>
         </aside>
         <main id="editor-area" contenteditable="true">
             <h1 id="editor-title" contenteditable="true">Your Story Title</h1>
@@ -75,14 +73,6 @@
         </main>
     </div>
     <script>
-        document.getElementById('toggle-theme').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-        });
-
-        document.getElementById('toggle-font').addEventListener('click', function() {
-            const editor = document.getElementById('editor-area');
-            editor.style.fontFamily = editor.style.fontFamily === 'Poppins, sans-serif' ? 'Courier New, monospace' : 'Poppins, sans-serif';
-        });
 
         document.getElementById('add-image').addEventListener('click', function() {
             const imageUrl = prompt('Enter image URL:');
@@ -94,16 +84,7 @@
             }
         });
 
-        document.getElementById('show-moodboard').addEventListener('click', function() {
-            alert('Mood Board feature coming soon!');
-        });
-
-        document.getElementById('feedback').addEventListener('click', function() {
-            const feedback = prompt('Enter your feedback:');
-            if (feedback) {
-                alert('Thank you for your feedback!');
-            }
-        });
+       
     </script>
 </body>
 </html>
