@@ -86,35 +86,48 @@ particlesJS("particles-js", {
 // 🚀------------------- USER REGISTRATION HANDLER -------------------🚀
 document.getElementById("story-form").addEventListener("submit", async (event) => {
     event.preventDefault(); // Prevent page refresh
-  
+
     try {
-      // 📝 Collect form inputs
-      const formData = new FormData();
-      const fields = ["editor-title", "editor-content"]; // Only the fields that backend expects
-      
-      fields.forEach((field) => {
-        const value = document.getElementById(field)?.value.trim();
-        if (value) formData.append(field, value);
-      });
-  
-    
-  
-      // 🌐 Send registration request
-      const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories/write", {
-        method: "POST",
-        body: formData,
-      });
-  
-      // ✅ Handle response
-      if (response.ok) {
-        alert("🎉 Story Written succesfully !...");
-        window.location.href = "index.html"; // Redirect to login page
-      } else {
-        const errorData = await response.json();
-        alert(`❌ Writting failed: ${errorData.error || "Please try again."}`);
-      }
+        // 📝 Collect form inputs
+        const title = document.getElementById("editor-title").value.trim();
+        const content = document.getElementById("editor-content").value.trim();
+
+        if (!title || !content) {
+            alert("🚫 Title and Content cannot be empty!");
+            return;
+        }
+
+        // 🌐 Send request to backend
+        const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories/write", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ title, content }),
+        });
+
+        // ✅ Handle response
+        if (response.ok) {
+            alert("🎉 Story submitted successfully!");
+            localStorage.clear(); // Clear saved draft after submission
+            window.location.href = "index.html"; // Redirect after successful submission
+        } else {
+            const errorData = await response.json();
+            alert(`❌ Submission failed: ${errorData.error || "Please try again."}`);
+        }
     } catch (error) {
-      console.error("Writting Error:", error);
-      alert("🚫 An error occurred during writting story. Please try again.");
+        console.error("Submission Error:", error);
+        alert("🚫 An error occurred. Please try again.");
     }
-  });
+});
+// Auto-save every 5 seconds
+setInterval(() => {
+    localStorage.setItem("storyTitle", document.getElementById("editor-title").value.trim());
+    localStorage.setItem("storyContent", document.getElementById("editor-content").value.trim());
+}, 5000);
+
+// Load saved data when the page opens
+window.addEventListener("load", () => {
+    document.getElementById("editor-title").value = localStorage.getItem("storyTitle") || "";
+    document.getElementById("editor-content").value = localStorage.getItem("storyContent") || "";
+});
