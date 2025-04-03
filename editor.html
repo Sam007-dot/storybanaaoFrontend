@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Story Editor</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: url('your-background-image.jpg') no-repeat center center/cover;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #editor-container {
+            display: flex;
+            width: 90%;
+            height: 80vh;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+        }
+        #toolbar {
+            width: 250px;
+            background: rgba(20, 20, 20, 0.9);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        #toolbar button {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #toolbar button:hover {
+            background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        }
+        #editor-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        #editor-title {
+            font-size: 2rem;
+            border-bottom: 2px solid white;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="editor-container">
+        <aside id="toolbar">
+            <h2>Tools</h2>
+            <button id="toggle-theme">Toggle Theme</button>
+            <button id="toggle-font">Change Font</button>
+            <button id="add-image">Add Image</button>
+            <button id="show-moodboard">Mood Board</button>
+            <button id="feedback">Feedback</button>
+        </aside>
+        <main id="editor-area" contenteditable="true">
+            <h1 id="editor-title" contenteditable="true">Your Story Title</h1>
+            <p>Start writing your immersive story here...</p>
+        </main>
+    </div>
+    <script>
+        document.getElementById('toggle-theme').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        document.getElementById('toggle-font').addEventListener('click', function() {
+            const editor = document.getElementById('editor-area');
+            editor.style.fontFamily = editor.style.fontFamily === 'Poppins, sans-serif' ? 'Courier New, monospace' : 'Poppins, sans-serif';
+        });
+
+        document.getElementById('add-image').addEventListener('click', function() {
+            const imageUrl = prompt('Enter image URL:');
+            if (imageUrl) {
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.style.maxWidth = '100%';
+                document.getElementById('editor-area').appendChild(img);
+            }
+        });
+
+        document.getElementById('show-moodboard').addEventListener('click', function() {
+            alert('Mood Board feature coming soon!');
+        });
+
+        document.getElementById('feedback').addEventListener('click', function() {
+            const feedback = prompt('Enter your feedback:');
+            if (feedback) {
+                alert('Thank you for your feedback!');
+            }
+        });
+    </script>
+</body>
+</html>
