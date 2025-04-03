@@ -69,3 +69,53 @@ document.addEventListener('DOMContentLoaded', async () => {
     showTestimonial(currentTestimonial);
 
 });
+particlesJS("particles-js", {
+    particles: {
+        number: { value: 100 },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: 2 },
+        move: { speed: 1 }
+    }
+});
+
+
+
+
+
+// 🚀------------------- USER REGISTRATION HANDLER -------------------🚀
+document.getElementById("story-form").addEventListener("submit", async (event) => {
+    event.preventDefault(); // Prevent page refresh
+  
+    try {
+      // 📝 Collect form inputs
+      const formData = new FormData();
+      const fields = ["editor-title", "editor-content"]; // Only the fields that backend expects
+      
+      fields.forEach((field) => {
+        const value = document.getElementById(field)?.value.trim();
+        if (value) formData.append(field, value);
+      });
+  
+    
+  
+      // 🌐 Send registration request
+      const response = await fetch("https://storybanaaobackend.onrender.com/api/stories/write", {
+        method: "POST",
+        body: formData,
+      });
+  
+      // ✅ Handle response
+      if (response.ok) {
+        alert("🎉 Story Written succesfully !...");
+        window.location.href = "index.html"; // Redirect to login page
+      } else {
+        const errorData = await response.json();
+        alert(`❌ Writting failed: ${errorData.error || "Please try again."}`);
+      }
+    } catch (error) {
+      console.error("Writting Error:", error);
+      alert("🚫 An error occurred during writting story. Please try again.");
+    }
+  });
+  
