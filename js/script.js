@@ -122,14 +122,14 @@ document.getElementById("story-form").addEventListener("submit", async (event) =
         alert("🚫 An error occurred. Please try again.");
     }
 });
-// Auto-save every 5 seconds
-setInterval(() => {
-    localStorage.setItem("storyTitle", document.getElementById("editor-title").value.trim());
-    localStorage.setItem("storyContent", document.getElementById("editor-content").value.trim());
-}, 5000);
+// // Auto-save every 5 seconds
+// setInterval(() => {
+//     localStorage.setItem("storyTitle", document.getElementById("editor-title").value.trim());
+//     localStorage.setItem("storyContent", document.getElementById("editor-content").value.trim());
+// }, 5000);
 
-// Load saved data when the page opens
-window.addEventListener("load", () => {
-    document.getElementById("editor-title").value = localStorage.getItem("storyTitle") || "";
-    document.getElementById("editor-content").value = localStorage.getItem("storyContent") || "";
-});
+// // Load saved data when the page opens
+// window.addEventListener("load", () => {
+//     document.getElementById("editor-title").value = localStorage.getItem("storyTitle") || "";
+//     document.getElementById("editor-content").value = localStorage.getItem("storyContent") || "";
+// });
