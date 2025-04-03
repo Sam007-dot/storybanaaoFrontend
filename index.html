@@ -309,15 +309,16 @@ footer {
         
         
         <script>
-            document.getElementById("downloadPDF").addEventListener("click", () => {
-                const pdfUrl = "TheLostKingdom.pdf";
-                const link = document.createElement("a");
-                link.href = pdfUrl;
-                link.download = "TheLostKingdom.pdf"; 
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });
+          document.getElementById("downloadPDF").addEventListener("click", () => {
+    const pdfUrl = "/assets/TheLostKingdom.pdf"; // Ensure this path is correct
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.setAttribute("download", "TheLostKingdom.pdf"); 
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
+
             document.getElementById("fullscreenPDF").addEventListener("click", () => {
     const viewer = document.getElementById("pdfViewer");
     if (viewer.requestFullscreen) {
@@ -330,6 +331,11 @@ footer {
         viewer.msRequestFullscreen(); // Internet Explorer
     }
 });
+const express = require('express');
+const app = express();
+app.use(express.static('public')); // Ensure assets are in "public" folder
+app.listen(3000, () => console.log('Server running on port 3000'));
+
 
             
         </script>
