@@ -100,7 +100,7 @@ document.getElementById("story-form").addEventListener("submit", async (event) =
     
   
       // 🌐 Send registration request
-      const response = await fetch("https://storybanaaobackend.onrender.com/api/stories/write", {
+      const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories/write", {
         method: "POST",
         body: formData,
       });
@@ -118,4 +118,3 @@ document.getElementById("story-form").addEventListener("submit", async (event) =
       alert("🚫 An error occurred during writting story. Please try again.");
     }
   });
-  
