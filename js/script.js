@@ -138,5 +138,5 @@ document.getElementById("story-form").addEventListener("submit", async (event) =
 document.addEventListener('DOMContentLoaded', async () => {
     const storyId = document.getElementById('storyId').value;
       const iframe = document.getElementById('pdfFrame');
-      iframe.src = `https://your-backend-url/api/stories/pdf/${storyId}`;
+      iframe.src = `https://your-backend-url/api/stories/pdf/67ee913582894782a0beee63`;
 });
