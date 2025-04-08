@@ -298,12 +298,13 @@ footer {
         </section>
         <div class="pdf-container">
             <h2>📜 Read "The Lost Kingdom"</h2>
-            <iframe id="pdfFrame" src="./assets/pdf/TheLostKingdom.pdf"></iframe>
+            <iframe id="pdfViewer" src="./assets/pdf/TheLostKingdom.pdf"></iframe>
 <a href="./assets/pdf/TheLostKingdom.pdf" download>Download PDF</a>
+<div id="viewtn"></div>
 
          
         
-        <script>
+        <!-- <script>
           document.getElementById("downloadPDF").addEventListener("click", () => {
     const pdfUrl = "/assets/TheLostKingdom.pdf"; // Ensure this path is correct
     const link = document.createElement("a");
@@ -333,7 +334,7 @@ app.listen(3000, () => console.log('Server running on port 3000'));
 
 
             
-        </script>
+        </script> -->
         
         
         <section id="testimonials" class="section animate-fade-in">
@@ -386,6 +387,62 @@ app.listen(3000, () => console.log('Server running on port 3000'));
     once: true,  // Ensures animation only runs once per session
     delay: 100,  // Adds a slight delay for smoother effect
 });
+
 </script>
+
+
+<script>
+    const API_BASE = 'https://storybanaaoBackend.com/api/stories'; 
+    // or 'http://localhost:5000/api/stories' during development
+  
+    // 1) load all stories into the <select>
+    async function loadStories() {
+      const res = await fetch(`${API_BASE}/allstories`);
+      const stories = await res.json();
+      const sel = document.getElementById('storySelect');
+      stories.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s._id;
+        opt.textContent = s.storyName;
+        sel.appendChild(opt);
+      });
+    }
+  
+    // 2) when user clicks “View” or “Download”
+    function updateUIForSelection(id) {
+      const viewBtn = document.getElementById('viewBtn');
+      const downloadBtn = document.getElementById('downloadBtn');
+      if (!id) {
+        viewBtn.disabled = downloadBtn.disabled = true;
+        return;
+      }
+      viewBtn.disabled = false;
+      downloadBtn.disabled = false;
+  
+      // set iframe src for inline view
+      viewBtn.onclick = () => {
+        document.getElementById('pdfViewer').src = `${API_BASE}/pdf/${id}`;
+      };
+  
+      // set download link
+      downloadBtn.onclick = () => {
+        const link = document.createElement('a');
+        link.href = `${API_BASE}/pdf/${id}`;
+        // force download
+        link.setAttribute('download', '');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+    }
+  
+    document.getElementById('storySelect').addEventListener('change', e => {
+      updateUIForSelection(e.target.value);
+    });
+  
+    // initialize
+    loadStories();
+  </script>
+  
 </body>
 </html>
