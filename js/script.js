@@ -72,16 +72,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-// particlesJS("particles-js", {
-//     particles: {
-//         number: { value: 100 },
-//         shape: { type: "circle" },
-//         opacity: { value: 0.5 },
-//         size: { value: 2 },
-//         move: { speed: 1 }
-//     }
-// });
-
 
 
 
@@ -123,18 +113,6 @@ document.getElementById("story-form").addEventListener("submit", async (event) =
         alert("🚫 An error occurred. Please try again.");
     }
 });
-// // Auto-save every 5 seconds
-// setInterval(() => {
-//     localStorage.setItem("storyTitle", document.getElementById("editor-title").value.trim());
-//     localStorage.setItem("storyContent", document.getElementById("editor-content").value.trim());
-// }, 5000);
-
-// // Load saved data when the page opens
-// window.addEventListener("load", () => {
-//     document.getElementById("editor-title").value = localStorage.getItem("storyTitle") || "";
-//     document.getElementById("editor-content").value = localStorage.getItem("storyContent") || "";
-// });
-
 
 document.addEventListener('DOMContentLoaded', async () => {
     const storyId = document.getElementById('storyId').value;
@@ -166,7 +144,7 @@ async function fetchStories() {
           </div>
         `;
   
-        StoriesContainer.appendChild(planCard);
+        storiesContainer.appendChild(planCard);
       });
     } catch (error) {
       console.error("Error fetching Stories:", error);
