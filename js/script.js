@@ -1,4 +1,3 @@
-const storiesContainer = document.getElementById("storiesContainer");
 document.addEventListener('DOMContentLoaded', async () => {
     const profileSection = document.getElementById('profileSection');
 
@@ -114,42 +113,64 @@ document.getElementById("story-form").addEventListener("submit", async (event) =
     }
 });
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const storyId = document.getElementById('storyId').value;
-      const iframe = document.getElementById('pdfFrame');
-      iframe.src = `https://storybanaaoBackend.onrender.com/api/stories/pdf/67ee913582894782a0beee63`;
-});
+
+const storiesContainer = document.getElementById("storiesContainer");
+
+
 
 async function fetchStories() {
-    try {
-      const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories/allstories");
-      const stories = await response.json();
+    const container = document.getElementById('storiesContainer');
+    container.innerHTML = '<p>Loading stories...</p>'; // Optional loader
 
-      console.log(stories);
-      storiesContainer.innerHTML = ""; // Clear previous Stories
-  
-      stories.forEach((story) => {
-        const storyCard = document.createElement("div");
-        storyCard.className = "card  stories__card card--padding0";
-        storyCard.innerHTML = `
-          <div class="card__header">
-            <img src="https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?cs=srgb&dl=pexels-pixabay-36762.jpg&fm=jpg" alt="story Banner" class="card__header__banner" />
-          </div>
-          <div class="stories__card__body">
-            <h3 style="text-align: center">${story.title}</h3>
-            <div class="card__plan">${story.content}</div>
-          </div>
-          <div class="card__footer">
-            <button class="card__footer__btn btn--white">Subscribe</button>
-          </div>
-        `;
-  
-        storiesContainer.appendChild(planCard);
-      });
+    try {
+        const response = await fetch('/api/stories'); // Replace with your actual API endpoint
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+
+        const stories = await response.json();
+
+        // Check if any stories are returned
+        if (!stories.length) {
+            container.innerHTML = '<p>No stories available yet.</p>';
+            return;
+        }
+
+        // Clear old content
+        container.innerHTML = '';
+
+        // Populate the stories
+        stories.forEach(story => {
+            const card = document.createElement('div');
+            card.className = 'stories__card';
+
+            card.innerHTML = `
+                <div class="card__header">
+                    <img src="${story.bannerUrl || './assets/images/default.jpg'}" alt="Story Banner" class="card__header__banner">
+                </div>
+                <div class="stories__card__body">
+                    <h3>${story.title}</h3>
+                    <p class="card__story">${story.snippet || 'No summary available.'}</p>
+                </div>
+                <div class="card__footer">
+                    <button class="card__footer__btn" onclick="viewStory('${story._id}')">Read More</button>
+                </div>
+            `;
+
+            container.appendChild(card);
+        });
+
     } catch (error) {
-      console.error("Error fetching Stories:", error);
+        console.error('Error fetching stories:', error);
+        container.innerHTML = `<p>Error loading stories. Please try again later.</p>`;
     }
-  }
-  
-  // Fetch Stories on page load
-  fetchStories();
+}
+
+// Example function for story viewing (to be implemented)
+function viewStory(id) {
+    window.location.href = `/story.html?id=${id}`; // Adjust this based on routing
+}
+
+// Call the function on page load
+document.addEventListener('DOMContentLoaded', fetchStories);
+

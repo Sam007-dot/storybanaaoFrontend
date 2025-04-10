@@ -79,10 +79,7 @@ h1 {
     font-size: 3.5em;
     margin-bottom: 15px;
 }
-#pdfSection
-.hidden {
-    display: none;
-}
+
 
 p {
     font-size: 1.2em;
@@ -235,19 +232,6 @@ p {
 }
 
 
-.pdf-container {
-    width: 80%;
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    text-align: center;
-}
-
 iframe {
     width: 100%;
     height: 500px;
@@ -255,24 +239,9 @@ iframe {
     border-radius: 8px;
 }
 
-#downloadPDF {
-    margin-top: 15px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(135deg, #ff007f, #5700ff);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
 
-#downloadPDF:hover {
-    background: linear-gradient(135deg, #ff4da6, #7a00ff);
-    transform: scale(1.05);
-}
-/* for particle.s */
+
+
 #particles-js {
     position: fixed;
     width: 100%;
@@ -395,16 +364,7 @@ footer {
 
             not stories yet.....
           </div>
-       </section>
-        <!-- <div class="pdf-container">
-            <h2>📜 Read "The Lost Kingdom"</h2>
-            <iframe id="pdfViewer" src="./assets/pdf/TheLostKingdom.pdf"></iframe>
-<a href="./assets/pdf/TheLostKingdom.pdf" download>Download PDF</a>
-<div id="viewtn"></div> -->
-
-         
-        
-        
+       </section>        
         <section id="testimonials" class="section animate-fade-in">
             <div class="container" data-aos="fade-up"
             data-aos-anchor-placement="center-center">
@@ -456,43 +416,6 @@ footer {
     delay: 100,  // Adds a slight delay for smoother effect
 });
 
-
-const storiesContainer = document.getElementById("storiesContainer");
-
-
-async function fetchStories() {
-  try {
-    const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories/allstories");
-    const stories = await response.json();
-
-    console.log(stories);
-    storiesContainer.innerHTML = "";
-
-    stories.forEach((story) => {
-      const storyCard = document.createElement("div");
-      storyCard.className = "card stories__card card--padding0";
-      storyCard.innerHTML = `
-        <div class="card__header">
-          <img src="https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?cs=srgb&dl=pexels-pixabay-36762.jpg&fm=jpg" alt="story Banner" class="card__header__banner" />
-        </div>
-        <div class="stories__card__body">
-          <h3 style="text-align: center">${story.title}</h3>
-          <div class="card__plan">${story.content}</div>
-        </div>
-        <div class="card__footer">
-          <button class="card__footer__btn btn--white">Interested</button>
-        </div>
-      `;
-
-      storiesContainer.appendChild(storyCard);
-    });
-  } catch (error) {
-    console.error("Error fetching Stories:", error);
-  }
-}
-
-  // Fetch Stories on page load
-  fetchStories();
 </script>
   
 </body>
