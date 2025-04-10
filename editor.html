@@ -116,35 +116,38 @@
                 <input type="text" id="editor-title" name="title" placeholder="Your Story Title" required>
                 <textarea id="editor-content" name="content" placeholder="Start writing your immersive story here..."
                     required></textarea>
+                <input type="file" id="editor-banner" name="banner">
                 <button type="submit" id="submit-button">Submit Story</button>
             </form>
         </main>
     </div>
     <script>
         document.getElementById("story-form").addEventListener("submit", async (event) => {
-            event.preventDefault(); // Prevent default form submission
-
+            event.preventDefault();
+        
             try {
-                // Get input values
                 const storyName = document.getElementById("editor-title").value.trim();
                 const storyContent = document.getElementById("editor-content").value.trim();
-
-                // Validation
+                const storyBannerInput = document.getElementById("editor-banner");
+        
                 if (!storyName || !storyContent) {
                     alert("🚫 Title and Content cannot be empty!");
                     return;
                 }
-
-                // Make POST request to backend
+        
+                const formData = new FormData();
+                formData.append("storyName", storyName);
+                formData.append("storyContent", storyContent);
+        
+                if (storyBannerInput.files.length > 0) {
+                    formData.append("storyBanner", storyBannerInput.files[0]);
+                }
+        
                 const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ storyName, storyContent }) // storyBanner not included here
+                    body: formData
                 });
-
-                // Handle response
+        
                 if (response.ok) {
                     alert("🎉 Story submitted successfully!");
                     localStorage.clear();
@@ -158,7 +161,8 @@
                 alert("🚫 An error occurred. Please try again.");
             }
         });
-    </script>
+        </script>
+        
 
 </body>
 
