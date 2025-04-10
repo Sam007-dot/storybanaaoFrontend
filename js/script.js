@@ -79,42 +79,42 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 // 🚀------------------- USER REGISTRATION HANDLER -------------------🚀
-document.getElementById("story-form").addEventListener("submit", async (event) => {
-    event.preventDefault(); // Prevent page refresh
+// document.getElementById("story-form").addEventListener("submit", async (event) => {
+//     event.preventDefault(); // Prevent page refresh
 
-    try {
-        // 📝 Collect form inputs
-        const title = document.getElementById("editor-title").value.trim();
-        const content = document.getElementById("editor-content").value.trim();
+//     try {
+//         // 📝 Collect form inputs
+//         const title = document.getElementById("editor-title").value.trim();
+//         const content = document.getElementById("editor-content").value.trim();
 
-        if (!title || !content) {
-            alert("🚫 Title and Content cannot be empty!");
-            return;
-        }
+//         if (!title || !content) {
+//             alert("🚫 Title and Content cannot be empty!");
+//             return;
+//         }
 
-        // 🌐 Send request to backend
-        const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ title, content }),
-        });
+//         // 🌐 Send request to backend
+//         const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify({ title, content }),
+//         });
 
-        // ✅ Handle response
-        if (response.ok) {
-            alert("🎉 Story submitted successfully!");
-            localStorage.clear(); // Clear saved draft after submission
-            window.location.href = "index.html"; // Redirect after successful submission
-        } else {
-            const errorData = await response.json();
-            alert(`❌ Submission failed: ${errorData.error || "Please try again."}`);
-        }
-    } catch (error) {
-        console.error("Submission Error:", error);
-        alert("🚫 An error occurred. Please try again.");
-    }
-});
+//         // ✅ Handle response
+//         if (response.ok) {
+//             alert("🎉 Story submitted successfully!");
+//             localStorage.clear(); // Clear saved draft after submission
+//             window.location.href = "index.html"; // Redirect after successful submission
+//         } else {
+//             const errorData = await response.json();
+//             alert(`❌ Submission failed: ${errorData.error || "Please try again."}`);
+//         }
+//     } catch (error) {
+//         console.error("Submission Error:", error);
+//         alert("🚫 An error occurred. Please try again.");
+//     }
+// });
 
 
 async function fetchStories() {
