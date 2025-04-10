@@ -155,7 +155,7 @@ async function fetchStories() {
         storyCard.className = "card  stories__card card--padding0";
         storyCard.innerHTML = `
           <div class="card__header">
-            <img src="${story.thumbnail}" alt="story Banner" class="card__header__banner" />
+            <img src="https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?cs=srgb&dl=pexels-pixabay-36762.jpg&fm=jpg" alt="story Banner" class="card__header__banner" />
           </div>
           <div class="stories__card__body">
             <h3 style="text-align: center">${story.title}</h3>

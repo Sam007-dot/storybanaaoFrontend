@@ -393,9 +393,9 @@ footer {
        <section class="stories">
         <div class="storiesContainer" id="storiesContainer">
 
-
+            not stories yet.....
   
-            <div class="storyCard">
+            <!-- <div class="storyCard">
               <div class="card__header">
                 <img
                   src="${story.storyBanner}"
@@ -412,7 +412,7 @@ footer {
               <div class="card__footer">
                 <button class="card__footer__btn btn--white">Interested</button>
               </div>
-            </div>
+            </div> -->
           </div>
        </section>
         <div class="pdf-container">
@@ -511,56 +511,56 @@ app.listen(3000, () => console.log('Server running on port 3000'));
 
 
 <script>
-    const API_BASE = 'https://storybanaaoBackend.com/api/stories'; 
+    // const API_BASE = 'https://storybanaaoBackend.com/api/stories'; 
     // or 'http://localhost:5000/api/stories' during development
   
     // 1) load all stories into the <select>
-    async function loadStories() {
-      const res = await fetch(`${API_BASE}/allstories`);
-      const stories = await res.json();
-      const sel = document.getElementById('storySelect');
-      stories.forEach(s => {
-        const opt = document.createElement('option');
-        opt.value = s._id;
-        opt.textContent = s.storyName;
-        sel.appendChild(opt);
-      });
-    }
+    // async function loadStories() {
+    //   const res = await fetch(`${API_BASE}/allstories`);
+    //   const stories = await res.json();
+    //   const sel = document.getElementById('storySelect');
+    //   stories.forEach(s => {
+    //     const opt = document.createElement('option');
+    //     opt.value = s._id;
+    //     opt.textContent = s.storyName;
+    //     sel.appendChild(opt);
+    //   });
+    // }
   
     // 2) when user clicks “View” or “Download”
-    function updateUIForSelection(id) {
-      const viewBtn = document.getElementById('viewBtn');
-      const downloadBtn = document.getElementById('downloadBtn');
-      if (!id) {
-        viewBtn.disabled = downloadBtn.disabled = true;
-        return;
-      }
-      viewBtn.disabled = false;
-      downloadBtn.disabled = false;
+    // function updateUIForSelection(id) {
+    //   const viewBtn = document.getElementById('viewBtn');
+    //   const downloadBtn = document.getElementById('downloadBtn');
+    //   if (!id) {
+    //     viewBtn.disabled = downloadBtn.disabled = true;
+    //     return;
+    //   }
+    //   viewBtn.disabled = false;
+    //   downloadBtn.disabled = false;
   
-      // set iframe src for inline view
-      viewBtn.onclick = () => {
-        document.getElementById('pdfViewer').src = `${API_BASE}/pdf/${id}`;
-      };
+    //   // set iframe src for inline view
+    //   viewBtn.onclick = () => {
+    //     document.getElementById('pdfViewer').src = `${API_BASE}/pdf/${id}`;
+    //   };
   
-      // set download link
-      downloadBtn.onclick = () => {
-        const link = document.createElement('a');
-        link.href = `${API_BASE}/pdf/${id}`;
-        // force download
-        link.setAttribute('download', '');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      };
-    }
+    //   // set download link
+    //   downloadBtn.onclick = () => {
+    //     const link = document.createElement('a');
+    //     link.href = `${API_BASE}/pdf/${id}`;
+    //     // force download
+    //     link.setAttribute('download', '');
+    //     document.body.appendChild(link);
+    //     link.click();
+    //     document.body.removeChild(link);
+    //   };
+    // }
   
-    document.getElementById('storySelect').addEventListener('change', e => {
-      updateUIForSelection(e.target.value);
-    });
+    // document.getElementById('storySelect').addEventListener('change', e => {
+    //   updateUIForSelection(e.target.value);
+    // });
   
     // initialize
-    loadStories();
+    // loadStories();
   </script>
   
 </body>
