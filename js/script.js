@@ -123,7 +123,7 @@ async function fetchStories() {
     container.innerHTML = '<p>Loading stories...</p>'; // Optional loader
 
     try {
-        const response = await fetch('/api/stories'); // Replace with your actual API endpoint
+        const response = await fetch('https://storybanaaoBackend.onrender.com/api/stories'); // Replace with your actual API endpoint
         if (!response.ok) {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
