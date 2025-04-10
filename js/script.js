@@ -146,7 +146,8 @@ async function fetchStories() {
     try {
       const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories/allstories");
       const stories = await response.json();
-  
+
+      console.log(stories);
       storiesContainer.innerHTML = ""; // Clear previous Stories
   
       stories.forEach((story) => {
