@@ -139,7 +139,7 @@ document.getElementById("story-form").addEventListener("submit", async (event) =
 document.addEventListener('DOMContentLoaded', async () => {
     const storyId = document.getElementById('storyId').value;
       const iframe = document.getElementById('pdfFrame');
-      iframe.src = `https://your-backend-url/api/stories/pdf/67ee913582894782a0beee63`;
+      iframe.src = `https://storybanaaoBackend.onrender.com/api/stories/pdf/67ee913582894782a0beee63`;
 });
 
 async function fetchStories() {
@@ -158,7 +158,7 @@ async function fetchStories() {
           </div>
           <div class="stories__card__body">
             <h3 style="text-align: center">${story.title}</h3>
-            <div class="card__plan">&#8377;${story.content}</div>
+            <div class="card__plan">${story.content}</div>
           </div>
           <div class="card__footer">
             <button class="card__footer__btn btn--white">Subscribe</button>
