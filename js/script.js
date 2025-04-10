@@ -1,5 +1,6 @@
 
 const storiesContainer = document.getElementById("sotriesContainer");
+
 document.addEventListener('DOMContentLoaded', async () => {
     const profileSection = document.getElementById('profileSection');
 
@@ -92,7 +93,7 @@ document.getElementById("story-form").addEventListener("submit", async (event) =
         }
 
         // 🌐 Send request to backend
-        const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories/write", {
+        const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -125,7 +126,7 @@ async function fetchStories() {
   
       stories.forEach((story, index) => {
         const storyCard = document.createElement("div");
-        storyCardCard.className = "card stories__card card--padding0";
+        storyCard.className = "card stories__card card--padding0";
         
         // Add AOS attributes for animation
         storyCard.setAttribute("data-aos", "fade-up"); // Animation type
