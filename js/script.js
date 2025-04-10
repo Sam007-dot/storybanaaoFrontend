@@ -1,3 +1,5 @@
+
+const storiesContainer = document.getElementById("sotriesContainer");
 document.addEventListener('DOMContentLoaded', async () => {
     const profileSection = document.getElementById('profileSection');
 
@@ -114,63 +116,50 @@ document.getElementById("story-form").addEventListener("submit", async (event) =
 });
 
 
-const storiesContainer = document.getElementById("storiesContainer");
-
-
-
 async function fetchStories() {
-    const container = document.getElementById('storiesContainer');
-    container.innerHTML = '<p>Loading stories...</p>'; // Optional loader
-
     try {
-        const response = await fetch('https://storybanaaoBackend.onrender.com/api/stories'); // Replace with your actual API endpoint
-        if (!response.ok) {
-            throw new Error(`Error ${response.status}: ${response.statusText}`);
-        }
-
-        const stories = await response.json();
-
-        // Check if any stories are returned
-        if (!stories.length) {
-            container.innerHTML = '<p>No stories available yet.</p>';
-            return;
-        }
-
-        // Clear old content
-        container.innerHTML = '';
-
-        // Populate the stories
-        stories.forEach(story => {
-            const card = document.createElement('div');
-            card.className = 'stories__card';
-
-            card.innerHTML = `
-                <div class="card__header">
-                    <img src="${story.bannerUrl || './assets/images/default.jpg'}" alt="Story Banner" class="card__header__banner">
-                </div>
-                <div class="stories__card__body">
-                    <h3>${story.title}</h3>
-                    <p class="card__story">${story.snippet || 'No summary available.'}</p>
-                </div>
-                <div class="card__footer">
-                    <button class="card__footer__btn" onclick="viewStory('${story._id}')">Read More</button>
-                </div>
-            `;
-
-            container.appendChild(card);
-        });
-
+      const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories");
+      const stories = await response.json();
+  
+      storiesContainer.innerHTML = ""; // Clear previous storys
+  
+      stories.forEach((story, index) => {
+        const storyCard = document.createElement("div");
+        storyCardCard.className = "card stories__card card--padding0";
+        
+        // Add AOS attributes for animation
+        storyCard.setAttribute("data-aos", "fade-up"); // Animation type
+        storyCard.setAttribute("data-aos-delay", `${index * 100}`); // Staggered animation delay
+  
+        storyCard.innerHTML = `
+          <div class="card__header">
+            <img src="${story.storyBanner}" alt="Story Banner" class="card__header__banner" />
+          </div>
+          <div class="stories__card__body">
+            <h3 style="text-align: center">${story.storyName}</h3>
+            <div class="card__story">&#8377;${story.storyContent}</div>
+          </div>
+          <div class="card__footer">
+            <button class="card__footer__btn">Interested</button>
+          </div>
+        `;
+  
+        storiesContainer.appendChild(storyCard);
+      });
+  
+      // Reinitialize AOS after adding new elements
+      AOS.init();
+      
     } catch (error) {
-        console.error('Error fetching stories:', error);
-        container.innerHTML = `<p>Error loading stories. Please try again later.</p>`;
+      console.error("Error fetching storys:", error);
     }
-}
-
-// Example function for story viewing (to be implemented)
-function viewStory(id) {
-    window.location.href = `/story.html?id=${id}`; // Adjust this based on routing
-}
-
-// Call the function on page load
-document.addEventListener('DOMContentLoaded', fetchStories);
-
+  }
+  
+  // Initialize AOS on Page Load
+  document.addEventListener("DOMContentLoaded", () => {
+    AOS.init();
+  });
+  
+  
+  // Fetch storys on page load
+  fetchStories();
