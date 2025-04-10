@@ -115,31 +115,125 @@ p {
     text-align: center;
 }
 
-#features {
+/* #features {
     background: #2222224f;
     border-radius: 10px;
     padding: 60px 0;
-}
+} */
 
 .visible {
     display: none;
 }
 
-.features-grid {
+/* .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-}
+} */
 
-.feature-item img {
+/* .feature-item img {
     width: 90px;
     margin-bottom: 20px;
     transition: transform 0.4s ease-in-out;
+} */
+
+/* .feature-item img:hover {
+    transform: scale(1.2) rotate(5deg);
+} */
+
+
+
+.storysContainer {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  overflow-x: auto;  /* Enable scrolling on mobile */
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+  justify-content: center;
+  flex-wrap: nowrap; /* Wrap items on larger screens */
+  box-sizing: border-box;
 }
 
-.feature-item img:hover {
-    transform: scale(1.2) rotate(5deg);
+/* Hide scrollbar for better aesthetics */
+.storysContainer::-webkit-scrollbar {
+  background: linear-gradient(135deg, #ff4da6, #7a00ff);
+  height: 5px;
+  border-radius: 20px;
+
 }
+.storysContainer::-webkit-scrollbar-thumb {
+    background: darkblue;
+}
+
+
+.storys__card {
+    background: linear-gradient(135deg, #ff4da6, #7a00ff);
+  color: white;
+  border-radius: 15px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  min-width: 300px;
+  max-width: 320px;
+  text-align: center;
+  overflow: hidden;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease-in-out;
+  flex-shrink: 0; /* Prevents shrinking in scroll */
+}
+
+.storys__card:hover {
+  transform: scale(1.05);
+}
+
+.card__header {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.card__header__banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.storys__card__body {
+  padding: 15px;
+}
+
+.storys__card__body h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+.card--padding0{
+  padding: 0;
+}
+.card__story {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.card__footer {
+  padding: 15px;
+}
+
+.card__footer__btn {
+  background: white;
+  color: #008b8b;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+}
+
+.card__footer__btn:hover {
+  background: #006666;
+  color: white;
+}
+
 
 .pdf-container {
     width: 80%;
@@ -277,7 +371,7 @@ footer {
             </div>
         </div>
     <main>
-        <section id="features" class="section animate-slide-in">
+        <!-- <section id="features" class="section animate-slide-in">
             <div class="container" data-aos="fade-up" data-aos-anchor-placement="center-center">
                 <h2>Key Features & Stories</h2>
                 <div class="features-grid">
@@ -295,7 +389,32 @@ footer {
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
+       <section class="stories">
+        <div class="storysContainer" id="storysContainer">
+
+
+  
+            <div class="storyCard">
+              <div class="card__header">
+                <img
+                  src="${story.storyBanner}"
+                  alt="story Banner"
+                  class="card__header__banner"
+                  />
+                </div>
+                <div class="storys__card__body">
+                  <h3 style="text-align: center">${story.storyName}</h3>
+                  <div class="card__story">
+                  &#8377;${story.storyValue}/${story.storyDuration}
+                </div>
+              </div>
+              <div class="card__footer">
+                <button class="card__footer__btn btn--white">Subscribe</button>
+              </div>
+            </div>
+          </div>
+       </section>
         <div class="pdf-container">
             <h2>📜 Read "The Lost Kingdom"</h2>
             <iframe id="pdfViewer" src="./assets/pdf/TheLostKingdom.pdf"></iframe>

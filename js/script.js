@@ -140,3 +140,36 @@ document.addEventListener('DOMContentLoaded', async () => {
       const iframe = document.getElementById('pdfFrame');
       iframe.src = `https://your-backend-url/api/stories/pdf/67ee913582894782a0beee63`;
 });
+
+async function fetchStories() {
+    try {
+      const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories/allstories");
+      const stories = await response.json();
+  
+      storiesContainer.innerHTML = ""; // Clear previous Stories
+  
+      stories.forEach((story) => {
+        const storyCard = document.createElement("div");
+        storyCard.className = "card  stories__card card--padding0";
+        storyCard.innerHTML = `
+          <div class="card__header">
+            <img src="${story.thumbnail}" alt="story Banner" class="card__header__banner" />
+          </div>
+          <div class="stories__card__body">
+            <h3 style="text-align: center">${story.title}</h3>
+            <div class="card__plan">&#8377;${story.content}</div>
+          </div>
+          <div class="card__footer">
+            <button class="card__footer__btn btn--white">Subscribe</button>
+          </div>
+        `;
+  
+        StoriesContainer.appendChild(planCard);
+      });
+    } catch (error) {
+      console.error("Error fetching Stories:", error);
+    }
+  }
+  
+  // Fetch Stories on page load
+  fetchStories();
