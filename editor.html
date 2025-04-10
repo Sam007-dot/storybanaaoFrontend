@@ -121,34 +121,34 @@
         </main>
     </div>
     <script>
-        // 🚀------------------- USER REGISTRATION HANDLER -------------------🚀
         document.getElementById("story-form").addEventListener("submit", async (event) => {
-            event.preventDefault(); // Prevent page refresh
+            event.preventDefault(); // Prevent default form submission
 
             try {
-                // 📝 Collect form inputs
+                // Get input values
                 const storyName = document.getElementById("editor-title").value.trim();
                 const storyContent = document.getElementById("editor-content").value.trim();
 
+                // Validation
                 if (!storyName || !storyContent) {
                     alert("🚫 Title and Content cannot be empty!");
                     return;
                 }
 
-                // 🌐 Send request to backend
+                // Make POST request to backend
                 const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json",
+                        "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ storyName, storyContent }),
+                    body: JSON.stringify({ storyName, storyContent }) // storyBanner not included here
                 });
 
-                // ✅ Handle response
+                // Handle response
                 if (response.ok) {
                     alert("🎉 Story submitted successfully!");
-                    localStorage.clear(); // Clear saved draft after submission
-                    window.location.href = "index.html"; // Redirect after successful submission
+                    localStorage.clear();
+                    window.location.href = "index.html";
                 } else {
                     const errorData = await response.json();
                     alert(`❌ Submission failed: ${errorData.error || "Please try again."}`);
@@ -159,6 +159,7 @@
             }
         });
     </script>
+
 </body>
 
 </html>
