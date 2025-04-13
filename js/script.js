@@ -1,5 +1,5 @@
 
-const storiesContainer = document.getElementById("sotriesContainer");
+const storiesContainer = document.getElementById("storiesContainer");
 
 document.addEventListener('DOMContentLoaded', async () => {
     const profileSection = document.getElementById('profileSection');
