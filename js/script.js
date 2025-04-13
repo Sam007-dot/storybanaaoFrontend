@@ -75,43 +75,77 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 async function fetchStories() {
-    try {
-      const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories");
-      const stories = await response.json();
-  
-      storiesContainer.innerHTML = ""; // Clear previous storys
-  
-      stories.forEach((story, index) => {
-        const storyCard = document.createElement("div");
-        storyCard.className = "card stories__card card--padding0";
-        
-        // Add AOS attributes for animation
-        storyCard.setAttribute("data-aos", "fade-up"); // Animation type
-        storyCard.setAttribute("data-aos-delay", `${index * 100}`); // Staggered animation delay
-  
-        storyCard.innerHTML = `
-          <div class="card__header">
-            <img src="${story.storyBanner}" alt="Story Banner" class="card__header__banner" />
-          </div>
-          <div class="stories__card__body">
-            <h3 style="text-align: center">${story.storyName}</h3>
-            <div class="card__story">${story.storyContent}</div>
-          </div>
-          <div class="card__footer">
-            <button class="card__footer__btn">View</button>
-          </div>
-        `;
-  
-        storiesContainer.appendChild(storyCard);
+  try {
+    const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories");
+    const stories = await response.json();
+
+    storiesContainer.innerHTML = "";
+
+    stories.forEach((story, index) => {
+      const storyCard = document.createElement("div");
+      storyCard.className = "card stories__card card--padding0";
+
+      storyCard.setAttribute("data-aos", "fade-up");
+      storyCard.setAttribute("data-aos-delay", `${index * 100}`);
+
+      storyCard.innerHTML = `
+        <div class="card__header">
+          <img src="${story.storyBanner}" alt="Story Banner" class="card__header__banner" />
+        </div>
+        <div class="stories__card__body">
+          <h3 style="text-align: Left; text-transform: uppercase">${story.storyName}</h3>
+          <div class="card__story">${story.storyContent.slice(0, 150)}...</div>
+        </div>
+        <div class="card__footer">
+          <button class="card__footer__btn" data-index="${index}">View</button>
+        </div>
+      `;
+
+      // Attach event listener to the "View" button
+      const viewBtn = storyCard.querySelector(".card__footer__btn");
+      viewBtn.addEventListener("click", () => {
+        openModal(story); // Pass the full story data
       });
-  
-      // Reinitialize AOS after adding new elements
-      AOS.init();
-      
-    } catch (error) {
-      console.error("Error fetching storys:", error);
-    }
+
+      storiesContainer.appendChild(storyCard);
+    });
+
+    AOS.init();
+
+  } catch (error) {
+    console.error("Error fetching storys:", error);
   }
+}
+
+
+
+
+
+
+const modal = document.getElementById("story-modal");
+const modalBanner = document.getElementById("modal-banner");
+const modalTitle = document.getElementById("modal-title");
+const modalContent = document.getElementById("modal-content");
+const closeBtn = document.querySelector(".close-btn");
+
+function openModal(story) {
+  modalBanner.src = story.storyBanner;
+  modalTitle.textContent = story.storyName;
+  modalContent.textContent = story.storyContent;
+
+  modal.style.display = "block";
+}
+
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
   
   // Initialize AOS on Page Load
   document.addEventListener("DOMContentLoaded", () => {

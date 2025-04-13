@@ -161,9 +161,11 @@
             box-sizing: border-box;
             cursor: pointer;
         }
-        .stories__card:hover{
+
+        .stories__card:hover {
             scale: 1.02;
         }
+
         /* Hide scrollbar for better aesthetics */
         .storiesContainer::-webkit-scrollbar {
             display: none;
@@ -309,6 +311,47 @@
             }
         }
 
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            text-align: left;
+            position: relative;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
@@ -413,6 +456,14 @@
                 </div>
             </section>
         </main>
+        <div id="story-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <img id="modal-banner" src="" alt="Story Banner" />
+                <h2 id="modal-title"></h2>
+                <p id="modal-content"></p>
+            </div>
+        </div>
 
         <footer>
             <div class="container footer-content animate-fade-in">
