@@ -98,7 +98,7 @@ async function fetchStories() {
             <div class="card__story">${story.storyContent}</div>
           </div>
           <div class="card__footer">
-            <button class="card__footer__btn">Interested</button>
+            <button class="card__footer__btn">View</button>
           </div>
         `;
   
