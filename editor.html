@@ -97,8 +97,13 @@
         }
 
         @media screen and (max-width: 760px) {
+            #toolbar{
+                width: 90%;
+                margin: 0 auto;
+            }
             #editor-container {
                 display: block;
+                height: auto;
             }
         }
     </style>
@@ -109,7 +114,7 @@
         <aside id="toolbar">
             <h2>Tools</h2>
             <button id="toggle-font">Change Font</button>
-            <button id="add-image">Add Image</button>
+            <button id="add-image">Change Font Size</button>
         </aside>
         <main id="editor-area">
             <form id="story-form" enctype="multipart/form-data">
