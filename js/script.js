@@ -7,40 +7,41 @@ document.addEventListener('DOMContentLoaded', async () => {
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
 
-  if (userId && token) {
-    try {
-      // Fetch user profile from backend
-      const response = await fetch(`https://storybanaaobackend.onrender.com/api/users/profile/${userId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+  if (!userId || !token) {
+    profileSection.innerHTML = `<a href="login.html" class="loginBtn cta-button">Login</a>`;
+    return;
+  }
 
-      if (!response.ok) throw new Error('Failed to fetch profile data!');
+  try {
+    // Fetch user profile from backend
+    const response = await fetch(`https://storybanaaobackend.onrender.com/api/users/profile/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
-      const { profilePicture, username } = await response.json();
+    if (!response.ok) throw new Error('Failed to fetch profile data!');
 
-      // Populate profile section
-      profileSection.innerHTML = `
-                <div id="profileSection">
-                    <div class="userP">
-                        <img src="${profilePicture || 'default-profile.png'}" alt="Profile Picture" class="profile-pic">
-                        <span>${username || 'User'}</span>
-                    </div>
-                    <button class="cta-button logoutBtn">Logout</button>
-                </div>
-            `;
+    const { profilePicture, username } = await response.json();
 
-      // Logout function
-      document.querySelector('.logoutBtn').addEventListener('click', () => {
-        localStorage.removeItem('userId');
-        localStorage.removeItem('token');
-        location.reload(); // Refresh page
-      });
+    // Populate profile section
+    profileSection.innerHTML = `
+      <div id="profileSection">
+        <div class="userP">
+          <img src="${profilePicture || 'default-profile.png'}" alt="Profile Picture" class="profile-pic">
+          <span>${username || 'User'}</span>
+        </div>
+        <button class="cta-button logoutBtn">Logout</button>
+      </div>
+    `;
 
-    } catch (error) {
-      console.error('Profile Fetch Error:', error);
-      profileSection.innerHTML = `<a href="login.html" class="loginBtn cta-button">Login</a>`;
-    }
-  } else {
+    // Logout function
+    document.querySelector('.logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('userId');
+      localStorage.removeItem('token');
+      location.reload(); // Refresh page
+    });
+
+  } catch (error) {
+    console.error('Profile Fetch Error:', error);
     profileSection.innerHTML = `<a href="login.html" class="loginBtn cta-button">Login</a>`;
   }
 
@@ -70,11 +71,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   setInterval(() => changeTestimonial(1), 5000);
   showTestimonial(currentTestimonial);
 
+  // AOS Init
+  AOS.init();
+
+  // Fetch stories
+  await fetchStories();
 });
 
 // Function to fetch and display stories
 async function fetchStories() {
   try {
+    storiesContainer.innerHTML = "<p>Loading stories...</p>";
+
     const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories");
     const stories = await response.json();
 
@@ -92,9 +100,9 @@ async function fetchStories() {
           <img src="${story.storyBanner}" alt="Story Banner" class="card__header__banner" />
         </div>
         <div class="stories__card__body">
-          <h2 style="text-align: Left; text-transform: uppercase">${story.storyName}</h2>
+          <h2 style="text-align: left; text-transform: uppercase">${story.storyName}</h2>
           <div class="card__story">${story.storyContent.slice(0, 150)}...</div>
-           <span>✍️ by <a href="profile.html?user=${story.author.username}">${story.author.username}</a></span>
+          <span>✍️ by <a href="profile.html?user=${story.author.username}">${story.author.username}</a></span>
         </div>
         <div class="card__footer">
           <button class="card__footer__btn" data-index="${index}">View</button>
@@ -104,7 +112,7 @@ async function fetchStories() {
       // Attach event listener to the "View" button
       const viewBtn = storyCard.querySelector(".card__footer__btn");
       viewBtn.addEventListener("click", () => {
-        openModal(story); // Pass the full story data
+        openModal(story);
       });
 
       storiesContainer.appendChild(storyCard);
@@ -114,6 +122,7 @@ async function fetchStories() {
 
   } catch (error) {
     console.error("Error fetching stories:", error);
+    storiesContainer.innerHTML = "<p>Failed to load stories. Please try again later.</p>";
   }
 }
 
@@ -123,34 +132,30 @@ const modalBanner = document.getElementById("modal-banner");
 const modalTitle = document.getElementById("modal-title");
 const modalContent = document.getElementById("modal-content");
 const closeBtn = document.querySelector(".close-btn");
-const modalAuthor = document.querySelector(".author")
+const modalAuthor = document.querySelector(".author");
 
 function openModal(story) {
   modalBanner.src = story.storyBanner;
+  modalBanner.onerror = () => {
+    modalBanner.src = 'default-banner.jpg';
+  };
   modalTitle.textContent = story.storyName;
   modalContent.textContent = story.storyContent;
-  modalAuthor.textContent = story.author
-
+  modalAuthor.textContent = `✍️ by ${story.author.username}`;
   modal.style.display = "block";
 }
 
-closeBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+}
 
 window.addEventListener("click", (event) => {
   if (event.target === modal) {
     modal.style.display = "none";
   }
 });
-
-// Initialize AOS on Page Load
-document.addEventListener("DOMContentLoaded", () => {
-  AOS.init();
-});
-
-// Fetch stories on page load
-fetchStories();
 
 // Particles.js configuration
 particlesJS("particles-js", {
@@ -227,9 +232,3 @@ particlesJS("particles-js", {
   },
   retina_detect: true
 });
-
-
-if (!localStorage.getItem("token")) {
-  alert("Please login to post or read stories.");
-  window.location.href = "login.html";
-}
