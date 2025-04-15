@@ -17,7 +17,7 @@ async function fetchProfileData() {
     // Display user profile
     profileHeader.innerHTML = `
       <div class="profile-info" data-aos="fade-in">
-        <img src="${user.avatar || 'default-avatar.png'}" class="profile-avatar" />
+        <img src="${user.profilePicture || 'default-avatar.png'}" class="profile-avatar" />
         <div class="profile-text">
           <h1>${user.username}</h1>
           <p>${user.bio || "This author hasn’t added a bio yet."}</p>
