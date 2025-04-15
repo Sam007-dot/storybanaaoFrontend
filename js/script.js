@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div id="profileSection">
                     <div class="userP">
                         <img src="${profilePicture || 'default-profile.png'}" alt="Profile Picture" class="profile-pic">
-                        <span>${username || 'User'}</span>
+                        <span>${name || 'User'}</span>
                     </div>
                     <button class="cta-button logoutBtn">Logout</button>
                 </div>
