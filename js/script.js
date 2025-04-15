@@ -102,7 +102,7 @@ async function fetchStories() {
         <div class="stories__card__body">
           <h2 style="text-align: left; text-transform: uppercase">${story.storyName}</h2>
           <div class="card__story">${story.storyContent.slice(0, 150)}...</div>
-          <span>✍️ by <a href="profile.html?user=${story.author.username}">${story.author.username}</a></span>
+          <span>✍️ by <a href="profile.html?user=${story.author}">${story.author}</a></span>
         </div>
         <div class="card__footer">
           <button class="card__footer__btn" data-index="${index}">View</button>
@@ -141,7 +141,7 @@ function openModal(story) {
   };
   modalTitle.textContent = story.storyName;
   modalContent.textContent = story.storyContent;
-  modalAuthor.textContent = `✍️ by ${story.author.username}`;
+  modalAuthor.textContent = `✍️ by ${story.author}`;
   modal.style.display = "block";
 }
 
