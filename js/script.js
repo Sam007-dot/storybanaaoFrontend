@@ -94,6 +94,7 @@ async function fetchStories() {
         <div class="stories__card__body">
           <h2 style="text-align: Left; text-transform: uppercase">${story.storyName}</h2>
           <div class="card__story">${story.storyContent.slice(0, 150)}...</div>
+           <span>✍️ by <a href="profile.html?user=${story.author.username}">${story.author.username}</a></span>
         </div>
         <div class="card__footer">
           <button class="card__footer__btn" data-index="${index}">View</button>
@@ -122,11 +123,13 @@ const modalBanner = document.getElementById("modal-banner");
 const modalTitle = document.getElementById("modal-title");
 const modalContent = document.getElementById("modal-content");
 const closeBtn = document.querySelector(".close-btn");
+const modalAuthor = document.querySelector(".author")
 
 function openModal(story) {
   modalBanner.src = story.storyBanner;
   modalTitle.textContent = story.storyName;
   modalContent.textContent = story.storyContent;
+  modalAuthor.textContent = story.author
 
   modal.style.display = "block";
 }
