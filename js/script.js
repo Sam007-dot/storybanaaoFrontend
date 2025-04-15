@@ -143,7 +143,7 @@ function openModal(story) {
   };
   modalTitle.textContent = story.storyName;
   modalContent.textContent = story.storyContent;
-  modalAuthor.textContent = `✍️ by ${story.author}`;
+  modalAuthor.textContent = `✍️ by ${story.author.username}`;
   modal.style.display = "block";
 }
 
