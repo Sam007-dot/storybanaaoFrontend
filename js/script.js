@@ -85,10 +85,12 @@ async function fetchStories() {
 
     const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories");
     const stories = await response.json();
+    console.log(stories);
 
     storiesContainer.innerHTML = "";
 
     stories.forEach((story, index) => {
+      console.log(story);
       const storyCard = document.createElement("div");
       storyCard.className = "card stories__card card--padding0";
 
