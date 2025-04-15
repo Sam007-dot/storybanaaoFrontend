@@ -238,7 +238,7 @@ particlesJS("particles-js", {
 
 
 const urlParams = new URLSearchParams(window.location.search);
-const username = urlParams.get("user");
+const username = urlParams.get("username");
 
 const profileHeader = document.getElementById("profileHeader");
 const profileStories = document.getElementById("profileStories");
