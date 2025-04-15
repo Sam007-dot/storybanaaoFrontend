@@ -171,6 +171,7 @@
             const storyName = document.getElementById("editor-title").value.trim();
             const storyContent = document.getElementById("editor-content").value.trim();
             const storyBannerInput = document.getElementById("editor-banner");
+            const author = req.body.id;
 
             if (!storyName || !storyContent) {
                 alert("🚫 Title and Content cannot be empty!");
@@ -180,6 +181,7 @@
             const formData = new FormData();
             formData.append("storyName", storyName);
             formData.append("storyContent", storyContent);
+            formDat.append("author", author )
 
             if (storyBannerInput.files.length > 0) {
                 formData.append("storyBanner", storyBannerInput.files[0]);
