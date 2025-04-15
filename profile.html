@@ -103,6 +103,7 @@
       <!-- Stories by this user will be loaded here -->
     </div>
   </section>
+  
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -113,7 +114,7 @@
 
     async function fetchProfileData() {
       try {
-        profileHeader.innerHTML = "<p>Loading profile...</p>";
+        profileHeader.innerHTML = `<img src="./Animation - 1744729294598.gif" alt="">`;
 
         // Fetch user info
         const userRes = await fetch(`https://storybanaaobackend.onrender.com/api/users/${username}`);
