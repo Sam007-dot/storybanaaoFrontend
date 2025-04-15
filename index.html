@@ -1,491 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StoryCraft - Interactive Story Generator</title>
-    <style>
-        /* General Styles */
-        body {
-            background: url('./assets/images/omni.jpg') center/cover no-repeat;
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #201e20;
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suggestions - StoryCraft</title>
+  
+  <!-- Import futuristic font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
 
+  <!-- Font Awesome for icons (optional) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-        .container {
-            width: 85%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+  <!-- Particles.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
-        /* Header Styles */
-        header {
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-            color: white;
-            text-align: center;
-            padding: 150px 0;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(252, 159, 216, 0);
-        }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeIn 1.2s forwards ease-in-out;
-        }
+    /* Particles container */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
 
-        .loginBtn {
-            padding: 10px 20px;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            text-decoration: none;
-        }
+    .container {
+      padding: 80px 30px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-        .profile-pic {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 10px;
-            border: 2px solid #fff;
-        }
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 60px;
+      background: linear-gradient(90deg, #0ff, #00f, #f0f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        #profileSection {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: absolute;
-            top: 20px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 20px;
-            box-sizing: border-box;
-        }
+    .suggestion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
 
-        #profileSection .userP {
-            display: flex;
-            justify-content: start;
-            gap: 10px;
-            align-items: center;
-        }
+    .suggestion-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(0, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        h1 {
-            font-size: 3.5em;
-            margin-bottom: 15px;
-        }
+    .suggestion-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #0ff, 0 0 40px #00f, 0 0 60px #f0f;
+    }
 
+    .suggestion-card h2 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      color: #0ff;
+    }
 
-        p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
+    .suggestion-card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
 
-        .cta-button {
-            background: linear-gradient(90deg, #ff6b6b, #6a5acd);
-            color: white;
-            padding: 15px 35px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2em;
-            font-weight: bold;
-            /* Improved readability */
-            letter-spacing: 1px;
-            /* Better spacing */
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
-        }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+      }
 
-        .cta-button:hover {
-            background: linear-gradient(90deg, #6a5acd, #ff6b6b);
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.5);
-        }
+      .container {
+        padding: 60px 20px 20px;
+      }
 
-        /* Features Section */
-        .section {
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        /* #features {
-    background: #2222224f;
-    border-radius: 10px;
-    padding: 60px 0;
-} */
-
-        .visible {
-            display: none;
-        }
-
-        /* .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-} */
-
-        /* .feature-item img {
-    width: 90px;
-    margin-bottom: 20px;
-    transition: transform 0.4s ease-in-out;
-} */
-
-        /* .feature-item img:hover {
-    transform: scale(1.2) rotate(5deg);
-} */
-
-
-
-        .storiesContainer {
-            display: flex;
-            gap: 20px;
-            padding: 50px 20px;
-            overflow-y: hidden;
-            overflow-x: auto;
-            /* Enable scrolling on mobile */
-            white-space: nowrap;
-            scroll-snap-type: x mandatory;
-            justify-content: center;
-            flex-wrap: wrap;
-            /* Wrap items on larger screens */
-            box-sizing: border-box;
-            cursor: pointer;
-        }
-
-        .stories__card:hover {
-            scale: 1.02;
-        }
-
-        /* Hide scrollbar for better aesthetics */
-        .storiesContainer::-webkit-scrollbar {
-            display: none;
-        }
-
-        .stories__card {
-            background: linear-gradient(90deg, #6a5acd, #ff6b6b);
-            color: white;
-            border-radius: 15px;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-            width: 24.5%;
-            text-align: center;
-            overflow: hidden;
-            scroll-snap-align: start;
-            transition: transform 0.3s ease-in-out;
-            flex-shrink: 0;
-            /* Prevents shrinking in scroll */
-        }
-
-        .stories__card {
-            transform: scale(1.05);
-        }
-
-        .card__header {
-            width: 100%;
-            height: 120px;
-            overflow: hidden;
-        }
-
-        .card__header__banner {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .stories__card__body {
-            padding: 15px;
-            background: whitesmoke;
-            text-align: left;
-        }
-
-        .stories__card__body h2 {
-            font-weight: bold;
-            color: #ff6b6b;
-        }
-
-        .card--padding0 {
-            padding: 0;
-        }
-
-        .card__story {
-            font-size: 12px;
-            font-weight: bold;
-            margin: 10px 0;
-            color: #6a5acd;
-            white-space:normal ;            
-        }
-
-        .card__footer {
-            padding: 15px;
-        }
-
-        .card__footer__btn {
-            background: white;
-            color: #ff6b6b;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            border: none;
-        }
-
-        .card__footer__btn:hover {
-            background: whitesmoke;
-        }
-
-
-        iframe {
-            width: 100%;
-            height: 500px;
-            border: none;
-            border-radius: 8px;
-        }
-
-
-
-
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            background: radial-gradient(circle, rgba(18, 18, 50, 1) 0%, rgba(5, 5, 30, 1) 100%);
-            z-index: -1;
-        }
-
-
-        /* Testimonials */
-        #testimonials {
-            background: linear-gradient(135deg, #ff6b6b17, #695acd10);
-            padding: 60px 0;
-            border-radius: 10px;
-        }
-
-        .testimonial-slider {
-            display: flex;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .testimonial-item {
-            padding: 25px;
-            border-radius: 12px;
-            margin: 20px;
-            background: #1e1e2e02;
-            display: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .testimonial-item.active {
-            display: block;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #11111100;
-            color: rgb(255, 244, 254);
-            text-align: center;
-            padding: 30px 0;
-            border-top: 2px solid #6a5acd;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            padding-top: 60px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        .modal-content {
-            background-color: #fff;
-            color: #6a5acd;
-            margin: auto;
-            padding: 2rem;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 800px;
-            text-align: left;
-            position: relative;
-        }
-
-        .modal-content img {
-            height: 150px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .close-btn {
-            position: absolute;
-            right: 20px;
-            top: 10px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-            }
-
-            h1 {
-                font-size: 2.8em;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .storiesContainer {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: flex-start;
-                scroll-snap-type: x mandatory;
-            }
-
-            .stories__card {
-                width: 90%;
-            }
-        }
-
-        /* Desktop View (Wrap items) */
-        @media screen and (min-width: 769px) {
-            .storiesContainer {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-        }
-    </style>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
+      .suggestion-card {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <header>
-        <div id="particles-js"></div>
+  <div id="particles-js"></div>
+  <div class="container">
+    <h1><i class="fas fa-lightbulb"></i> Story Suggestions</h1>
+    <div class="suggestion-grid">
+      <div class="suggestion-card">
+        <h2><i class="fas fa-robot"></i> Interactive Story Builder</h2>
+        <p>Create personalized stories with unique plotlines, characters, and twists based on your choices.</p>
+      </div>
+      <div class="suggestion-card">
+        <h2><i class="fas fa-fire"></i> Popular Themes</h2>
+        <p>Explore trending genres like sci-fi adventures, fantasy quests, and mystery thrillers.</p>
+      </div>
+      <div class="suggestion-card">
+        <h2><i class="fas fa-brain"></i> AI Recommendations</h2>
+        <p>Get intelligent suggestions tailored to your reading and writing preferences.</p>
+      </div>
+      <div class="suggestion-card">
+        <h2><i class="fas fa-users"></i> Community Picks</h2>
+        <p>See what stories other users love and get inspired by top-rated content.</p>
+      </div>
+      <div class="suggestion-card">
+        <h2><i class="fas fa-random"></i> Random Prompts</h2>
+        <p>Jumpstart your imagination with randomly generated story prompts across all genres.</p>
+      </div>
+      <div class="suggestion-card">
+        <h2><i class="fas fa-cog"></i> Customize Your Adventure</h2>
+        <p>Adjust tone, pacing, setting, and character personality before starting your story.</p>
+      </div>
+    </div>
+  </div>
 
-        <div id="profileSection">
-            <a href="login.html" class="loginBtn cta-button">Login</a>
-        </div>
-
-
-        <div class="hero">
-            <div class="hero-content animate-fade-in">
-                <h1>Unleash Your Inner Storyteller</h1>
-                <p>Craft immersive and captivating narratives with our interactive story generator.</p>
-                <button class="cta-button" onclick="scrollToSection('features')">Start Your Story</button>
-            </div>
-        </div>
-        <main>
-            <section class="stories">
-                <div class="storiesContainer" id="storiesContainer">
-
-                    not stories yet.....
-                </div>
-            </section>
-            <section id="testimonials" class="section animate-fade-in">
-                <div class="container" data-aos="fade-up" data-aos-anchor-placement="center-center">
-                    <h2>What Our Users Say</h2>
-                    <div class="testimonial-slider">
-                        <div class="testimonial-item active">
-                            <p>"StoryCraft has changed the way I write! The branching paths make storytelling so
-                                engaging."</p>
-                            <p class="author">- Shibam Basu, Fantasy Writer</p>
-                        </div>
-                        <div class="testimonial-item">
-                            <p>"I love how I can create unique characters and truly immersive worlds."</p>
-                            <p class="author">- Puja Ratna Pallavi, Game Developer</p>
-                        </div>
-                        <div class="testimonial-item">
-                            <p>"Finally, a tool that brings my ideas to life! The interactive elements are fantastic."
-                            </p>
-                            <p class="author">- Gayatri Obroy, IPS</p>
-                        </div>
-                        <div class="testimonial-item">
-                            <p>"StoryCraft helps me structure my stories with ease. A must-have for writers!"</p>
-                            <p class="author">- Arnab Mehta, Screenwriter</p>
-                        </div>
-                    </div>
-                    <div class="slider-controls">
-                        <button class="prev" onclick="changeTestimonial(-1)">&#10094;</button>
-                        <button class="next" onclick="changeTestimonial(1)">&#10095;</button>
-                    </div>
-                </div>
-            </section>
-
-            <section id="cta-secondary" class="section secondary-cta animate-slide-in">
-                <div class="container">
-                    <h2>Ready to Start Your Adventure?</h2>
-                    <button class="cta-button" onclick="location.href='editor.html'">Create Now</button>
-                </div>
-            </section>
-        </main>
-        <div id="story-modal" class="modal hidden">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <img id="modal-banner" src="" alt="Story Banner" />
-                <h2 id="modal-title"></h2>
-                <p id="modal-content"></p>
-            </div>
-        </div>
-
-        <footer>
-            <div class="container footer-content animate-fade-in">
-                <p>&copy; 2025 StoryCraft. All rights reserved.</p>
-            </div>
-        </footer>
-
-        <script src="js/script.js"></script>
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script>
-            AOS.init({
-                once: true,  // Ensures animation only runs once per session
-                delay: 100,  // Adds a slight delay for smoother effect
-            });
-
-        </script>
-
-<div id="particles-js"></div>
-
-
+  <script>
+    // particles.js config
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 90, density: { enable: true, value_area: 800 } },
+        color: { value: ["#00ffff", "#ff00ff", "#00ffcc"] },
+        shape: {
+          type: "circle",
+          stroke: { width: 0, color: "#000000" }
+        },
+        opacity: {
+          value: 0.5,
+          random: true,
+          anim: { enable: false }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: { enable: false }
+        },
+        line_linked: {
+          enable: true,
+          distance: 120,
+          color: "#00ffff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "bounce",
+          attract: { enable: false }
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 0.7 } },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
 </body>
-
 </html>
