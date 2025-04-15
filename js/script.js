@@ -1,4 +1,3 @@
-
 const storiesContainer = document.getElementById("storiesContainer");
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -73,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
-
+// Function to fetch and display stories
 async function fetchStories() {
   try {
     const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories");
@@ -113,15 +112,11 @@ async function fetchStories() {
     AOS.init();
 
   } catch (error) {
-    console.error("Error fetching storys:", error);
+    console.error("Error fetching stories:", error);
   }
 }
 
-
-
-
-
-
+// Modal logic
 const modal = document.getElementById("story-modal");
 const modalBanner = document.getElementById("modal-banner");
 const modalTitle = document.getElementById("modal-title");
@@ -146,17 +141,15 @@ window.addEventListener("click", (event) => {
   }
 });
 
-
 // Initialize AOS on Page Load
 document.addEventListener("DOMContentLoaded", () => {
   AOS.init();
 });
 
-
-// Fetch storys on page load
+// Fetch stories on page load
 fetchStories();
 
-
+// Particles.js configuration
 particlesJS("particles-js", {
   particles: {
     number: {
