@@ -104,7 +104,7 @@ async function fetchStories() {
         <div class="stories__card__body">
           <h2 style="text-align: left; text-transform: uppercase">${story.storyName}</h2>
           <div class="card__story">${story.storyContent.slice(0, 150)}...</div>
-          <span>✍️ by <a href="profile.html?user=${story.author._id.username}">${story.author._id.username}</a></span>
+          <span>✍️ by <a href="profile.html?user=${story.author.username}">${story.author.username}</a></span>
         </div>
         <div class="card__footer">
           <button class="card__footer__btn" data-index="${index}">View</button>
