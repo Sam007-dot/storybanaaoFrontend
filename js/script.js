@@ -93,7 +93,7 @@ async function fetchStories() {
           <img src="${story.storyBanner}" alt="Story Banner" class="card__header__banner" />
         </div>
         <div class="stories__card__body">
-          <h3 style="text-align: Left; text-transform: uppercase">${story.storyName}</h3>
+          <h3 style="text-align: Left;>${story.storyName}</h3>
           <div class="card__story">${story.storyContent.slice(0, 150)}...</div>
         </div>
         <div class="card__footer">
