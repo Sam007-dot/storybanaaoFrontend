@@ -227,3 +227,9 @@ particlesJS("particles-js", {
   },
   retina_detect: true
 });
+
+
+if (!localStorage.getItem("token")) {
+  alert("Please login to post or read stories.");
+  window.location.href = "login.html";
+}
