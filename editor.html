@@ -171,7 +171,8 @@
             const storyName = document.getElementById("editor-title").value.trim();
             const storyContent = document.getElementById("editor-content").value.trim();
             const storyBannerInput = document.getElementById("editor-banner");
-            const author = req.body.id;
+            const userId = localStorage.getItem('userId');
+            const token = localStorage.getItem('token');
 
             if (!storyName || !storyContent) {
                 alert("🚫 Title and Content cannot be empty!");
