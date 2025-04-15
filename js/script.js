@@ -2,25 +2,25 @@
 const storiesContainer = document.getElementById("storiesContainer");
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const profileSection = document.getElementById('profileSection');
+  const profileSection = document.getElementById('profileSection');
 
-    // Retrieve stored authentication details
-    const userId = localStorage.getItem('userId');
-    const token = localStorage.getItem('token');
+  // Retrieve stored authentication details
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
 
-    if (userId && token) {
-        try {
-            // Fetch user profile from backend
-            const response = await fetch(`https://storybanaaobackend.onrender.com/api/users/profile/${userId}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+  if (userId && token) {
+    try {
+      // Fetch user profile from backend
+      const response = await fetch(`https://storybanaaobackend.onrender.com/api/users/profile/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-            if (!response.ok) throw new Error('Failed to fetch profile data!');
+      if (!response.ok) throw new Error('Failed to fetch profile data!');
 
-            const { profilePicture, name } = await response.json();
+      const { profilePicture, name } = await response.json();
 
-            // Populate profile section
-            profileSection.innerHTML = `
+      // Populate profile section
+      profileSection.innerHTML = `
                 <div id="profileSection">
                     <div class="userP">
                         <img src="${profilePicture || 'default-profile.png'}" alt="Profile Picture" class="profile-pic">
@@ -30,46 +30,46 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
             `;
 
-            // Logout function
-            document.querySelector('.logoutBtn').addEventListener('click', () => {
-                localStorage.removeItem('userId');
-                localStorage.removeItem('token');
-                location.reload(); // Refresh page
-            });
+      // Logout function
+      document.querySelector('.logoutBtn').addEventListener('click', () => {
+        localStorage.removeItem('userId');
+        localStorage.removeItem('token');
+        location.reload(); // Refresh page
+      });
 
-        } catch (error) {
-            console.error('Profile Fetch Error:', error);
-            profileSection.innerHTML = `<a href="login.html" class="loginBtn cta-button">Login</a>`;
-        }
-    } else {
-        profileSection.innerHTML = `<a href="login.html" class="loginBtn cta-button">Login</a>`;
+    } catch (error) {
+      console.error('Profile Fetch Error:', error);
+      profileSection.innerHTML = `<a href="login.html" class="loginBtn cta-button">Login</a>`;
     }
+  } else {
+    profileSection.innerHTML = `<a href="login.html" class="loginBtn cta-button">Login</a>`;
+  }
 
-    // ================== TESTIMONIAL SLIDER ==================
-    let currentTestimonial = 0;
-    const testimonials = document.querySelectorAll('.testimonial-item');
-    const totalTestimonials = testimonials.length;
+  // ================== TESTIMONIAL SLIDER ==================
+  let currentTestimonial = 0;
+  const testimonials = document.querySelectorAll('.testimonial-item');
+  const totalTestimonials = testimonials.length;
 
-    function showTestimonial(index) {
-        testimonials.forEach((item, i) => {
-            item.style.display = i === index ? 'block' : 'none';
-        });
+  function showTestimonial(index) {
+    testimonials.forEach((item, i) => {
+      item.style.display = i === index ? 'block' : 'none';
+    });
+  }
+
+  function changeTestimonial(direction) {
+    currentTestimonial += direction;
+    if (currentTestimonial >= totalTestimonials) {
+      currentTestimonial = 0;
+    } else if (currentTestimonial < 0) {
+      currentTestimonial = totalTestimonials - 1;
     }
-
-    function changeTestimonial(direction) {
-        currentTestimonial += direction;
-        if (currentTestimonial >= totalTestimonials) {
-            currentTestimonial = 0;
-        } else if (currentTestimonial < 0) {
-            currentTestimonial = totalTestimonials - 1;
-        }
-        showTestimonial(currentTestimonial);
-    }
-
-    document.querySelector(".prev")?.addEventListener("click", () => changeTestimonial(-1));
-    document.querySelector(".next")?.addEventListener("click", () => changeTestimonial(1));
-    setInterval(() => changeTestimonial(1), 5000);
     showTestimonial(currentTestimonial);
+  }
+
+  document.querySelector(".prev")?.addEventListener("click", () => changeTestimonial(-1));
+  document.querySelector(".next")?.addEventListener("click", () => changeTestimonial(1));
+  setInterval(() => changeTestimonial(1), 5000);
+  showTestimonial(currentTestimonial);
 
 });
 
@@ -146,12 +146,88 @@ window.addEventListener("click", (event) => {
   }
 });
 
-  
-  // Initialize AOS on Page Load
-  document.addEventListener("DOMContentLoaded", () => {
-    AOS.init();
-  });
-  
-  
-  // Fetch storys on page load
-  fetchStories();
+
+// Initialize AOS on Page Load
+document.addEventListener("DOMContentLoaded", () => {
+  AOS.init();
+});
+
+
+// Fetch storys on page load
+fetchStories();
+
+
+particlesJS("particles-js", {
+  particles: {
+    number: {
+      value: 100,
+      density: {
+        enable: true,
+        value_area: 800
+      }
+    },
+    color: {
+      value: "#ffffff"
+    },
+    shape: {
+      type: "circle",
+      stroke: {
+        width: 0,
+        color: "#000000"
+      }
+    },
+    opacity: {
+      value: 0.8,
+      random: true,
+      anim: {
+        enable: true,
+        speed: 0.5,
+        opacity_min: 0.1,
+        sync: false
+      }
+    },
+    size: {
+      value: 2,
+      random: true,
+      anim: {
+        enable: false,
+        speed: 40,
+        size_min: 0.1,
+        sync: false
+      }
+    },
+    move: {
+      enable: true,
+      speed: 0.6,
+      direction: "none",
+      random: true,
+      straight: false,
+      out_mode: "out",
+      bounce: false
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: {
+        enable: true,
+        mode: "repulse"
+      },
+      onclick: {
+        enable: true,
+        mode: "push"
+      },
+      resize: true
+    },
+    modes: {
+      repulse: {
+        distance: 100,
+        duration: 0.4
+      },
+      push: {
+        particles_nb: 4
+      }
+    }
+  },
+  retina_detect: true
+});
