@@ -16,14 +16,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       if (!response.ok) throw new Error('Failed to fetch profile data!');
 
-      const { profilePicture, name } = await response.json();
+      const { profilePicture, username } = await response.json();
 
       // Populate profile section
       profileSection.innerHTML = `
                 <div id="profileSection">
                     <div class="userP">
                         <img src="${profilePicture || 'default-profile.png'}" alt="Profile Picture" class="profile-pic">
-                        <span>${name || 'User'}</span>
+                        <span>${username || 'User'}</span>
                     </div>
                     <button class="cta-button logoutBtn">Logout</button>
                 </div>
