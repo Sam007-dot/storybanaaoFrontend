@@ -134,7 +134,7 @@ const modalBanner = document.getElementById("modal-banner");
 const modalTitle = document.getElementById("modal-title");
 const modalContent = document.getElementById("modal-content");
 const closeBtn = document.querySelector(".close-btn");
-const modalAuthor = document.querySelector(".author");
+const modalAuthor = document.getElementById("author");
 
 function openModal(story) {
   modalBanner.src = story.storyBanner;
