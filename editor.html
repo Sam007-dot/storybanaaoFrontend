@@ -147,66 +147,63 @@
             <button id="toggle-font-size">Change Font Size</button>
         </aside> -->
         <main id="editor-area">
-            <form id="story-form" enctype="multipart/form-data">
-                <input type="text" id="editor-title" name="storyName" placeholder="Your Story Title" required>
-                <textarea id="editor-content" name="storyContent" placeholder="Start writing your immersive story here..." required></textarea>
-                <label for="editor-banner">Add Banner (optional):</label>
-                <input type="file" id="editor-banner" name="storyBanner" accept="image/*">
-                <button type="submit" id="submit-button">Submit Story</button>
+            <form id="storyForm" enctype="multipart/form-data">
+                <input type="text" id="storyName" name="storyName" required placeholder="Story Name" />
+                <textarea id="storyContent" name="storyContent" required placeholder="Write your story..."></textarea>
+                <input type="file" id="storyBanner" name="storyBanner" accept="image/*" />
+                <button type="submit">Submit</button>
             </form>
         </main>
     </div>
 
     <script>
         // 🚨 Check login
-        const token = localStorage.getItem("token");
-        if (!token) {
-            alert("⚠️ Please login to create a story!");
-            window.location.href = "login.html";
-        }
+        // const token = localStorage.getItem("token");
+        // if (!token) {
+        //     alert("⚠️ Please login to create a story!");
+        //     window.location.href = "login.html";
+        // }
 
-        document.getElementById("story-form").addEventListener("submit", async (event) => {
-            event.preventDefault();
+        document.getElementById("storyForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
 
-            const storyName = document.getElementById("editor-title").value.trim();
-            const storyContent = document.getElementById("editor-content").value.trim();
-            const storyBannerInput = document.getElementById("editor-banner");
-            const userId = localStorage.getItem('userId');
-            const token = localStorage.getItem('token');
+            const storyName = document.getElementById("storyName").value.trim();
+            const storyContent = document.getElementById("storyContent").value.trim();
+            const storyBannerInput = document.getElementById("storyBanner");
+            const userId = localStorage.getItem("userId"); // Get logged-in user's ID
 
-            if (!storyName || !storyContent) {
-                alert("🚫 Title and Content cannot be empty!");
+            if (!storyName || !storyContent || !userId) {
+                alert("Please fill in all fields.");
                 return;
             }
 
             const formData = new FormData();
             formData.append("storyName", storyName);
             formData.append("storyContent", storyContent);
-            formData.append("author", userId )
+            formData.append("author", userId); // Include author ID from localStorage
 
             if (storyBannerInput.files.length > 0) {
-                formData.append("storyBanner", storyBannerInput.files[0]);
+                formData.append("storyBanner", storyBannerInput.files[0]); // Optional banner
             }
 
             try {
-                const response = await fetch("https://storybanaaoBackend.onrender.com/api/stories", {
+                const response = await fetch("http://localhost:3000/stories/add", {
                     method: "POST",
                     body: formData,
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
                 });
 
+                const data = await response.json();
+
                 if (response.ok) {
-                    alert("🎉 Story submitted successfully!");
-                    window.location.href = "index.html";
+                    alert("Story submitted successfully!");
+                    // Optionally redirect or clear the form
+                    document.getElementById("storyForm").reset();
                 } else {
-                    const errorData = await response.json();
-                    alert(`❌ Submission failed: ${errorData.message || "Please try again."}`);
+                    alert(`Error: ${data.message}`);
                 }
             } catch (error) {
-                console.error("Submission Error:", error);
-                alert("🚫 An error occurred. Please try again.");
+                console.error("Error submitting story:", error);
+                alert("An unexpected error occurred. Please try again.");
             }
         });
     </script>
