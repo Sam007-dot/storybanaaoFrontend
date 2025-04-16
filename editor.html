@@ -182,7 +182,7 @@
             const formData = new FormData();
             formData.append("storyName", storyName);
             formData.append("storyContent", storyContent);
-            formData.append("author", author )
+            formData.append("author", userId )
 
             if (storyBannerInput.files.length > 0) {
                 formData.append("storyBanner", storyBannerInput.files[0]);
