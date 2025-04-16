@@ -29,12 +29,12 @@ document.addEventListener('DOMContentLoaded', async () => {
           <img src="${profilePicture || 'default-profile.png'}" alt="Profile Picture" class="profile-pic">
           <span>${username || 'User'}</span>
         </div>
-        <button class="cta-button logoutBtn">Logout</button>
+        <button class="cta-button loginBtn" id="logoutBtn">Logout</button>
       </div>
     `;
 
     // Logout function
-    document.querySelector('.logoutBtn').addEventListener('click', () => {
+    document.querySelector('#logoutBtn').addEventListener('click', () => {
       localStorage.removeItem('userId');
       localStorage.removeItem('token');
       location.reload(); // Refresh page
