@@ -66,7 +66,7 @@
             overflow-y: auto;
         }
 
-        #editor-title {
+        #storyName {
             font-size: 2rem;
             border: none;
             border-bottom: 2px solid white;
@@ -78,7 +78,7 @@
             margin-bottom: 20px;
         }
 
-        #editor-content {
+        #storyContent {
             display: block;
             width: 100%;
             height: 350px;
@@ -93,7 +93,7 @@
             box-sizing: border-box;
         }
 
-        #editor-banner {
+        #storyBanner {
             margin-top: 15px;
             color: white;
         }
@@ -151,7 +151,7 @@
                 <input type="text" id="storyName" name="storyName" placeholder="Your Story Title" required>
                 <textarea id="storyContent" name="storyContent"
                     placeholder="Start writing your immersive story here..." required></textarea>
-                <label for="editor-banner">Add Banner (optional):</label>
+                <label for="storyBanner">Add Banner (optional):</label>
                 <input type="file" id="storyBanner" name="storyBanner" accept="image/*">
                 <button type="submit" id="submit-button">Submit Story</button>
             </form>
