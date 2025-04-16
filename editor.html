@@ -147,11 +147,13 @@
             <button id="toggle-font-size">Change Font Size</button>
         </aside> -->
         <main id="editor-area">
-            <form id="storyForm" enctype="multipart/form-data">
-                <input type="text" id="storyName" name="storyName" required placeholder="Story Name" />
-                <textarea id="storyContent" name="storyContent" required placeholder="Write your story..."></textarea>
-                <input type="file" id="storyBanner" name="storyBanner" accept="image/*" />
-                <button type="submit">Submit</button>
+            <form id="story-form" enctype="multipart/form-data">
+                <input type="text" id="editor-title" name="storyName" placeholder="Your Story Title" required>
+                <textarea id="editor-content" name="storyContent"
+                    placeholder="Start writing your immersive story here..." required></textarea>
+                <label for="editor-banner">Add Banner (optional):</label>
+                <input type="file" id="editor-banner" name="storyBanner" accept="image/*">
+                <button type="submit" id="submit-button">Submit Story</button>
             </form>
         </main>
     </div>
