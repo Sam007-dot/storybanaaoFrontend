@@ -134,7 +134,7 @@ const modalBanner = document.getElementById("modal-banner");
 const modalTitle = document.getElementById("modal-title");
 const modalContent = document.getElementById("modal-content");
 const closeBtn = document.querySelector(".close-btn");
-const modalAuthor = document.getElementById("author");
+// const modalAuthor = document.getElementById("author");
 
 function openModal(story) {
   modalBanner.src = story.storyBanner;
@@ -143,7 +143,7 @@ function openModal(story) {
   };
   modalTitle.textContent = story.storyName;
   modalContent.textContent = story.storyContent;
-  modalAuthor.textContent = `✍️ by ${story.author.username}`;
+  // modalAuthor.textContent = `✍️ by ${story.author.username}`;  
   modal.style.display = "block";
 }
 
