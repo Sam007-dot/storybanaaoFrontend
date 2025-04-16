@@ -5,7 +5,7 @@ document.getElementById("registerForm").addEventListener("submit", async (event)
   try {
     // 📝 Collect form inputs
     const formData = new FormData();
-    const fields = ["name", "email", "password"]; // Only the fields that backend expects
+    const fields = ["username", "email", "password"]; // Only the fields that backend expects
     
     fields.forEach((field) => {
       const value = document.getElementById(field)?.value.trim();
