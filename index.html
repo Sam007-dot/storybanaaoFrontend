@@ -17,23 +17,24 @@
             line-height: 1.6;
             overflow-x: hidden;
         }
-    
+
+
         .container {
-            width: 90%;
+            width: 85%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
-            box-sizing: border-box;
         }
-    
+
+        /* Header Styles */
         header {
+
             color: white;
             text-align: center;
             padding: 150px 0;
             position: relative;
             box-shadow: 0 10px 30px rgba(252, 159, 216, 0);
         }
-    
+
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
@@ -41,7 +42,7 @@
             transform: translateY(-20px);
             animation: fadeIn 1.2s forwards ease-in-out;
         }
-    
+
         .loginBtn {
             padding: 10px 20px;
             position: absolute;
@@ -49,7 +50,7 @@
             right: 20px;
             text-decoration: none;
         }
-    
+
         .profile-pic {
             width: 40px;
             height: 40px;
@@ -58,34 +59,36 @@
             margin-right: 10px;
             border: 2px solid #fff;
         }
-    
+
         #profileSection {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            position: absolute;
-            top: 20px;
+            /* position: absolute; */
+            /* top: 20px; */
             width: 100%;
             padding: 0 20px;
             box-sizing: border-box;
         }
-    
+
         #profileSection .userP {
             display: flex;
+            justify-content: start;
             gap: 10px;
             align-items: center;
         }
-    
+
         h1 {
             font-size: 3.5em;
             margin-bottom: 15px;
         }
-    
+
+
         p {
             font-size: 1.2em;
             margin-bottom: 30px;
         }
-    
+
         .cta-button {
             background: linear-gradient(90deg, #ff6b6b, #6a5acd);
             color: white;
@@ -94,100 +97,113 @@
             border-radius: 10px;
             font-size: 1.2em;
             font-weight: bold;
+            /* Improved readability */
             letter-spacing: 1px;
+            /* Better spacing */
             cursor: pointer;
             transition: all 0.3s ease-in-out;
             box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
         }
-    
+
         .cta-button:hover {
             background: linear-gradient(90deg, #6a5acd, #ff6b6b);
             transform: scale(1.1);
             box-shadow: 0 6px 15px rgba(255, 107, 107, 0.5);
         }
-    
+
+        /* Features Section */
         .section {
             padding: 80px 0;
             text-align: center;
         }
-    
+
+
         .visible {
             display: none;
         }
-    
-        .storiesContainer {
+
+ .storiesContainer {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
             gap: 20px;
             padding: 50px 20px;
+            overflow-y: hidden;
             overflow-x: auto;
+            /* Enable scrolling on mobile */
+            white-space: nowrap;
             scroll-snap-type: x mandatory;
+            justify-content: center;
+            flex-wrap: wrap;
+            /* Wrap items on larger screens */
             box-sizing: border-box;
             cursor: pointer;
         }
-    
+
+        .stories__card:hover {
+            scale: 1.02;
+        }
+
+        /* Hide scrollbar for better aesthetics */
         .storiesContainer::-webkit-scrollbar {
             display: none;
         }
-    
+
         .stories__card {
             background: linear-gradient(90deg, #6a5acd, #ff6b6b);
             color: white;
             border-radius: 15px;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
             width: 24.5%;
-            min-width: 260px;
-            max-width: 300px;
             text-align: center;
+            overflow: hidden;
             scroll-snap-align: start;
             transition: transform 0.3s ease-in-out;
             flex-shrink: 0;
+            /* Prevents shrinking in scroll */
         }
-    
-        .stories__card:hover {
+
+        .stories__card {
             transform: scale(1.05);
         }
-    
+
         .card__header {
             width: 100%;
             height: 120px;
             overflow: hidden;
         }
-    
+
         .card__header__banner {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-    
+
         .stories__card__body {
             padding: 15px;
             background: whitesmoke;
             text-align: left;
         }
-    
+
         .stories__card__body h2 {
             font-weight: bold;
             color: #ff6b6b;
         }
-    
+
         .card--padding0 {
             padding: 0;
         }
-    
+
         .card__story {
             font-size: 12px;
             font-weight: bold;
             margin: 10px 0;
             color: #6a5acd;
-            white-space: normal;
+            white-space:normal ;            
         }
-    
+
         .card__footer {
             padding: 15px;
         }
-    
+
         .card__footer__btn {
             background: white;
             color: #ff6b6b;
@@ -198,18 +214,22 @@
             transition: 0.3s;
             border: none;
         }
-    
+
         .card__footer__btn:hover {
             background: whitesmoke;
         }
-    
+
+
         iframe {
             width: 100%;
             height: 500px;
             border: none;
             border-radius: 8px;
         }
-    
+
+
+
+
         #particles-js {
             position: fixed;
             width: 100%;
@@ -217,22 +237,22 @@
             background: radial-gradient(circle, rgba(18, 18, 50, 1) 0%, rgba(5, 5, 30, 1) 100%);
             z-index: -1;
         }
-    
+
+
         /* Testimonials */
         #testimonials {
             background: linear-gradient(135deg, #ff6b6b17, #695acd10);
             padding: 60px 0;
             border-radius: 10px;
         }
-    
+
         .testimonial-slider {
             display: flex;
             justify-content: center;
             overflow: hidden;
             position: relative;
-            flex-wrap: wrap;
         }
-    
+
         .testimonial-item {
             padding: 25px;
             border-radius: 12px;
@@ -240,14 +260,13 @@
             background: #1e1e2e02;
             display: none;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            flex: 1 1 100%;
-            max-width: 500px;
         }
-    
+
         .testimonial-item.active {
             display: block;
         }
-    
+
+        /* Footer */
         footer {
             background-color: #11111100;
             color: rgb(255, 244, 254);
@@ -255,19 +274,21 @@
             padding: 30px 0;
             border-top: 2px solid #6a5acd;
         }
-    
+
+        /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(-20px);
             }
-    
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-    
+
+
         .modal {
             display: none;
             position: fixed;
@@ -280,7 +301,7 @@
             overflow: auto;
             background: rgba(0, 0, 0, 0.8);
         }
-    
+
         .modal-content {
             background-color: #fff;
             color: #6a5acd;
@@ -291,15 +312,14 @@
             max-width: 800px;
             text-align: left;
             position: relative;
-            box-sizing: border-box;
         }
-    
+
         .modal-content img {
             height: 150px;
             border-radius: 8px;
             margin-bottom: 20px;
         }
-    
+
         .close-btn {
             position: absolute;
             right: 20px;
@@ -308,39 +328,51 @@
             font-weight: bold;
             cursor: pointer;
         }
-    
+
+
         /* Responsive Design */
         @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
             h1 {
-                font-size: 2.5em;
+                font-size: 2.8em;
             }
-    
-            .cta-button {
-                font-size: 1em;
-                padding: 12px 25px;
+
+            .features-grid {
+                grid-template-columns: 1fr;
             }
-    
+
+            .storiesContainer {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                scroll-snap-type: x mandatory;
+                box-sizing: border-box;
+            }
+
             .stories__card {
                 width: 90%;
-                max-width: 100%;
             }
-    
-            .testimonial-item {
-                margin: 10px auto;
+            .modal{
+                box-sizing: border-box;
+                width: 90%;
             }
-    
-            #profileSection {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
+            .modal-content{
+                white-space: normal;
+                box-sizing: border-box;
             }
-    
-            .modal-content {
-                padding: 1.5rem;
+        }
+
+        /* Desktop View (Wrap items) */
+        @media screen and (min-width: 769px) {
+            .storiesContainer {
+                flex-wrap: wrap;
+                justify-content: center;
             }
         }
     </style>
-    
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -356,7 +388,7 @@
         <div id="particles-js"></div>
 
         <div id="profileSection">
-            <a href="login.html" class="loginBtn cta-button">Login</a>
+            <!-- <a href="login.html" class="loginBtn cta-button">Login</a> -->
         </div>
 
 
