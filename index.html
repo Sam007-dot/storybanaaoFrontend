@@ -5,6 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StoryCraft - Interactive Story Generator</title>
+    <script>
+        const userId = localStorage.getItem("userId");
+        const token = localStorage.getItem("token");
+      
+        if (!userId || !token) {
+          alert("⚠️ Please login to create a story.");
+          window.location.href = "login.html";
+        }
+      </script>
+      
     <style>
         /* General Styles */
         body {

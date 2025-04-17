@@ -7,6 +7,16 @@
     <title>Futuristic Story Editor</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <script defer src="./js/script.js"></script>
+    <script>
+        const userId = localStorage.getItem("userId");
+        const token = localStorage.getItem("token");
+      
+        if (!userId || !token) {
+          alert("⚠️ Please login to create a story.");
+          window.location.href = "login.html";
+        }
+      </script>
+      
     <style>
         body {
             margin: 0;
@@ -188,14 +198,6 @@
 
             document.addEventListener("DOMContentLoaded", () => {
                 const postBtn = document.querySelector(".post-story-btn");
-
-                if (!isLoggedIn && postBtn) {
-                    postBtn.classList.add("disabled");
-                    postBtn.innerText = "Login to Post";
-                    postBtn.addEventListener("click", () => {
-                        alert("Please login to post a story.");
-                    });
-                }
             });
 
 
