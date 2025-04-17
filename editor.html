@@ -149,8 +149,8 @@
         <main id="editor-area">
             <form id="storyForm" enctype="multipart/form-data">
                 <input type="text" id="storyName" name="storyName" placeholder="Your Story Title" required>
-                <textarea id="storyContent" name="storyContent"
-                    placeholder="Start writing your immersive story here..." required></textarea>
+                <textarea id="storyContent" name="storyContent" placeholder="Start writing your immersive story here..."
+                    required></textarea>
                 <label for="storyBanner">Add Banner (optional):</label>
                 <input type="file" id="storyBanner" name="storyBanner" accept="image/*">
                 <button type="submit" id="submit-button">Submit Story</button>
@@ -183,6 +183,21 @@
             formData.append("storyName", storyName);
             formData.append("storyContent", storyContent);
             formData.append("author", userId); // Include author ID from localStorage
+
+            const postBtn = document.getElementById("submit-button");
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const postBtn = document.querySelector(".post-story-btn");
+
+                if (!isLoggedIn && postBtn) {
+                    postBtn.classList.add("disabled");
+                    postBtn.innerText = "Login to Post";
+                    postBtn.addEventListener("click", () => {
+                        alert("Please login to post a story.");
+                    });
+                }
+            });
+
 
             if (storyBannerInput.files.length > 0) {
                 formData.append("storyBanner", storyBannerInput.files[0]); // Optional banner
