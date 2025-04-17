@@ -6,6 +6,11 @@
     // Retrieve stored authentication details
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
+    if (!userId || !token) {
+      // Redirect to login page
+      window.location.href = "login.html";
+      return;
+    }
 
     if (!userId || !token) {
       profileSection.innerHTML = `<a href="login.html" class="loginBtn cta-button">Login</a>`;
@@ -74,12 +79,6 @@
     // AOS Init
     AOS.init();
 
-
-    if (!userId || !token) {
-      // Redirect to login page
-      window.location.href = "login.html";
-      return;
-    }
 
     // Fetch stories
     await fetchStories();
